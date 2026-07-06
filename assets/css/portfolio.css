@@ -201,14 +201,19 @@
 					box-shadow: 0 0 0 2px #e0e0e0 !important; 
 					margin: 0 !important; 
 				}
-				.timeline-year-label { margin-left: -5px !important; font-size: 0.95em !important; padding: 2px 12px !important; }
+				.timeline-year-label { margin-left: -5px !important; font-size: 0.95em !important; padding: 2px 12px !important; margin-bottom: 0.5em !important; }
 				
 				/* Mobile Project Cards: 2 Columns, No Description/Tags */
 				.timeline-projects { 
 					grid-template-columns: repeat(2, 1fr) !important; 
 					gap: 10px !important; 
+					margin-top: 0 !important;
 				}
 				.proj-card.full { grid-column: span 2 !important; }
+				
+				.proj-card img {
+					aspect-ratio: 4/3 !important; /* Make images taller on mobile */
+				}
 				
 				.proj-card p, .proj-card .proj-tags { 
 					display: none !important; 
