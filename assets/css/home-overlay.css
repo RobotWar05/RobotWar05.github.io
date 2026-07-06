@@ -92,3 +92,28 @@ body.is-home         { overflow: hidden; }
 	box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
 }
 .big-project-btn:hover i { transform: translateX(4px); }
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+	.home-title { 
+		font-size: min(3em, 12vw); 
+		white-space: nowrap;
+	}
+	.home-subtitle { 
+		font-size: min(1.1em, 3.8vw); 
+		padding: 0; 
+		margin-bottom: 2em; 
+		white-space: nowrap;
+	}
+	.big-project-btn { font-size: 1em; padding: 1em 2em !important; }
+}
+
+@media (max-width: 480px) {
+	.home-title { 
+		font-size: min(2.5em, 12vw); 
+	}
+	.home-subtitle { 
+		font-size: min(1em, 4vw); /* approx 12-15px depending on phone width */
+	}
+	.home-avatar-wrapper { width: 100px; height: 100px; }
+}
