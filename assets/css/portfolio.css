@@ -132,7 +132,10 @@
 				.modal-details { flex: unset; padding: 1.5em 1.2em; }
 				.modal-container { width: 95%; height: 90%; max-height: 90vh; }
 				.modal-details h3 { font-size: 1.4em; }
-				.carousel-btn { width: 40px; height: 40px; font-size: 1.2em; }
+				.carousel-btn { display: none !important; } /* Hide arrows on mobile */
+				.carousel-dots { padding: 6px 12px !important; gap: 8px !important; }
+				.carousel-dot { width: 8px !important; height: 8px !important; }
+				.modal-actions { justify-content: center !important; }
 			}
 
 			/* comment */
@@ -489,6 +492,6 @@
 
 
 /* Footer contrast enhancements */
-#footer { background-color: rgba(0, 0, 0, 0.85) !important; background-blend-mode: multiply; }
+#footer { background-color: rgba(0, 0, 0, 0.4) !important; padding: 2em 0 !important; }
 #footer .icons a { color: rgba(255, 255, 255, 0.9) !important; transition: color 0.2s ease; }
 #footer .icons a:hover { color: #49bf9d !important; }
