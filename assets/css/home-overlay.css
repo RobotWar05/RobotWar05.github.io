@@ -14,10 +14,10 @@
 
 	/* Nền: overlay texture + ảnh nền chính */
 	background-color: #1f1815;
-	background-image: url("pictures/overlay.png"), url("../../pictures/home/background_1.jpg");
-	background-position: top left, center center;
-	background-repeat: repeat, no-repeat;
-	background-size: auto, cover;
+	background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url("pictures/overlay.png"), url("../../pictures/home/background_1.jpg");
+	background-position: top left, top left, center center;
+	background-repeat: repeat, repeat, no-repeat;
+	background-size: auto, auto, cover;
 
 	/* Curtain Reveal: mặc định bay lên ngoài màn hình */
 	transform: translateY(-100vh);

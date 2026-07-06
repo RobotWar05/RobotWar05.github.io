@@ -1,9 +1,9 @@
 ---
-title: Knowledge Base – Portfolio
+title: Knowledge Base - Portfolio
 tags: [moc, root]
 ---
 
-# 📚 Portfolio – Knowledge Base
+# Portfolio - Knowledge Base
 
 Vault này là tài liệu kỹ thuật toàn diện cho [[https://robotwar05.github.io|robotwar05.github.io]].
 
@@ -11,25 +11,20 @@ Vault này là tài liệu kỹ thuật toàn diện cho [[https://robotwar05.gi
 
 | Thư mục | Nội dung |
 |---|---|
-| [[01_Architecture/Component_Structure]] | Kiến trúc Jekyll, luồng lắp ráp component |
-| [[02_Design_System/Visual_Rules]] | Quy tắc CSS cứng, layout, ảnh, hiệu ứng |
-| [[03_Developer_Guide/How_To_Edit]] | Quy trình thêm Project, Page, sửa Sidebar |
-| [[04_Changelog/Version_History]] | Lịch sử các bản cập nhật lớn |
+| [[01_Architecture/Component_Structure]] | Kiến trúc Single-Page, Logic sinh Modal động bằng Javascript |
+| [[02_Design_System/Visual_Rules]] | Quy tắc CSS cứng, Split Layout Modal, Button, và ảnh |
+| [[03_Developer_Guide/How_To_Edit]] | Quy trình nạp dự án mới vào projectMedia và sửa nội dung |
+| [[04_Changelog/Version_History]] | Lịch sử các bản cập nhật giao diện và tái cấu trúc |
 
-## Cấu trúc thư mục gốc
+## Cấu trúc thư mục gốc hiện tại
 
 ```
 RobotWar05.github.io/
-├── _includes/          ← Component: header, footer, head, scripts, home_overlay
-├── _layouts/           ← Layout: default.html (bộ khung bao toàn trang)
-├── index.html          ← Trang Home + Projects (Jekyll Frontmatter)
-├── Resume.html         ← Trang Resume PDF (Jekyll Frontmatter)
-├── Contact.html        ← Trang Contact (Jekyll Frontmatter)
-├── assets/             ← CSS, JS, Font, PDF
-├── images/             ← Ảnh (bg.jpg, me.JPEG, project images)
-├── my_web/             ← Vault Obsidian này
-└── README.md           ← Điểm vào cho developer mới
+├── index.html          <- Single-Page App chứa toàn bộ HTML, CSS, và JS logic
+├── Resume.html         <- Trang Resume PDF
+├── Contact.html        <- Trang Contact
+├── assets/             <- CSS (main.css, home-overlay.css), JS, Font, PDF
+├── pictures/           <- Ảnh (backgrounds, avatar, project images/videos)
+├── my_web/             <- Vault Obsidian này (Knowledge Base)
+└── README.md           <- Điểm vào cho developer mới
 ```
-
-> [!warning] Chú ý khi test local
-> Jekyll cần build mới hiển thị được. Mở `index.html` trực tiếp bằng trình duyệt sẽ hiện trang trắng vì chưa xử lý Liquid template. Cách test: push lên GitHub hoặc chạy `jekyll serve` local.

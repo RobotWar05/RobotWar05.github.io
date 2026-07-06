@@ -1,85 +1,45 @@
 ---
-title: Hướng Dẫn Thêm Mới & Sửa Đổi
-tags: [guide, development]
+title: Hướng Dẫn Thêm & Sửa Dự Án Mới
+tags: [guide, edit, tutorial]
 ---
 
-# 🛠️ Hướng Dẫn Thêm Mới & Sửa Đổi
+# 
+ॠ️ Quy Trình Thêm Sửa Dự Án
 
-## 1. Sửa thông tin Sidebar (tên, ảnh, chuyên ngành)
-
-→ Mở `_includes/header.html`. Thay đổi ở đây áp dụng **cho tất cả trang cùng lúc**.
-
-Không sửa trực tiếp trong `index.html`, `Resume.html` hay `Contact.html`.
-
----
-
-## 2. Sửa link footer (GitHub, LinkedIn, Email)
-
-→ Mở `_includes/footer.html`.
-
----
-
-## 3. Thêm Project mới vào trang chủ
-
-→ Mở `index.html`, tìm section `<!-- Two -->`, thêm một `<article>` theo template:
+## Bƿớc 1: Thêm HTML vào màn hình chính
+Mở file `index.html` strong, tìm khu vực id `two` (Recent Work). Thêm khối `<article class="proj-card">` như sau:
 
 ```html
-<article class="col-6 col-12-xsmall work-item">
-    <a href="LINK_DEMO" class="image fit thumb">
-        <img src="LINK_ANH" alt="" />
-    </a>
-    <h3 style="font-family:verdana;"><font color="black"><u>TÊN DỰ ÁN</u></font></h3>
-    <p><font color="black">Mô tả ngắn gọn 1 câu.<br/>
-    <ul>
-        <li><p>Bullet 1</p></li>
-        <li><p>Bullet 2</p></li>
-    </ul></font></p>
-    <code><font color="Red">Tech1</font></code>
-    <code><font color="Red">Tech2</font></code>
+<article class="proj-card">
+    <img src="pictures/Path_to_thumbnail.jpg" alt="" />
+    <div class="proj-body">
+        <h3>Tên Dự Án Của Bạn</h3>
+        <p class="proj-date">2026</p>
+        <div class="proj-tags"><span>C++</span><span>Python</span></div>
+        <p class="proj-desc">Mô tả ngắn gọn hiển thị ngay trên lưới...</p>
+        <p class="proj-details" style="display:none;">
+            Chi tiết quá trình làm, hiển thị trong popup Modal...
+        </p>
+    </div>
 </article>
 ```
 
-> [!tip] Giới hạn: mỗi hàng 2 project (`col-6`). Thêm nhiều hơn 6 project → trang dài, nên cân nhắc giữ ~6 nổi bật nhất.
+## Bước 2: Nạp Media vào hệ thống Modal
+Kéo xuống cuối trang `index.html`/ thêm đoạn biến `const projectMedia = { ... }`. Khai báo dự án mới vào đó.
 
----
+> [!important] Quy tắc Key
+> Key trong Object phải là một phần hoậc toàn bỏ chuỗi nằm trong thĻ `<h3>` của dỰ án để JS tự động quét trùng khớp.
 
-## 4. Tạo trang HTML mới
-
-1. Tạo file `TenTrang.html` ở **thư mục gốc** (cùng cấp với `index.html`).
-2. Dán Frontmatter vào dòng đầu:
-
-```yaml
----
-layout: default
-title: "Nguyen Viet Hoang Luong: Tên Trang"
----
+```javascript
+"Tên Du Tún": {
+    thumb: "pictures/folder/thumb.jpg", // ạnh nạp tự động ra ngoài trang chính
+    media: [ // Các media hiển thị trong cột trái của Modal
+        {type: 'img', src: 'pictures/folder/1.jpg'},
+        {type: 'img', src: 'pictures/folder/2.png'},
+        {type: 'video', src: 'pictures/folder/vid.mp4'}
+    ]
+}
 ```
 
-3. Viết nội dung HTML bên dưới (KHÔNG cần `<html>`, `<head>`, `<body>`).
-4. Nếu cần CSS riêng cho trang, thêm `extra_head` vào Frontmatter:
-
-```yaml
-extra_head: |
-  <style>
-    .custom-class { color: red; }
-  </style>
-```
-
----
-
-## 5. Thay ảnh đại diện
-
-1. Đặt file ảnh mới vào thư mục `images/`.
-2. Sửa tên file tại **2 chỗ** trong `_includes/header.html` và `_includes/home_overlay.html`.
-3. Điều chỉnh `object-position` trong `assets/css/main.css` nếu tiêu điểm mặt bị lệch.
-
----
-
-## 6. Thêm CSS toàn cục
-
-→ Mở `assets/css/main.css`. Thêm vào cuối file, dưới comment `/* Custom Overrides */`.
-
-> [!danger] Không xóa các rule sau trong main.css
-> - `html { overflow-y: scroll; }` → xóa sẽ gây giật lề khi chuyển trang
-> - `.image.avatar { aspect-ratio: 1/1; overflow: hidden; }` → xóa sẽ ảnh bị méo oval
-> - `#main { max-width: none; }` → xóa sẽ nội dung bên phải co lại
+## Lưu ý về Trạng thái "Coming Soon"
+Nếu bạn tạo thẻ HTML cho dự án mà chưa nạp mó vào `projectMedia` (hoậc nạp mà mảng `media` rỗng), hệ thống JS sẽ thông minh tự động xuất ra một màn hình Coming Soon trong Modal đề người xem biết là dự án này đang được cập nhật.
