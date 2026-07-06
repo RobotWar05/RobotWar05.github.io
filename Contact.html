@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<title>Nguyen Viet Hoang Luong: Contact</title>
@@ -34,14 +34,23 @@
 			}
 			.contact-btn.primary:hover { background: #333333; border-color: #333333 !important; }
 			.contact-meta {
-				display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				display: grid; grid-template-columns: repeat(4, minmax(250px, 1fr));
 				gap: 2rem; border-top: 1px solid #f0f0f0; padding-top: 2.5rem; margin-top: 1rem;
+				overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;
+			}
+			.contact-meta::-webkit-scrollbar { display: none; }
+			.meta-item {
+				display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;
 			}
 			.meta-item h4 {
 				font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.05em;
-				color: #999; margin-bottom: 0.5em; border-bottom: none; padding-bottom: 0;
+				color: #999; margin: 0 0 0.5em 0 !important; padding: 0 !important;
+				border-bottom: none; white-space: nowrap;
 			}
-			.meta-item p { margin: 0; color: #1a1a1a; font-weight: 500; font-size: 1.1em; }
+			.meta-item p {
+				margin: 0 !important; padding: 0 !important;
+				color: #1a1a1a; font-weight: 500; font-size: 1.1em; white-space: nowrap;
+			}
 			.phone-link { color: #1a1a1a !important; text-decoration: none !important; border-bottom: none !important; transition: color 0.2s; }
 			.phone-link:hover { color: #f56a6a !important; }
 		</style>
@@ -91,7 +100,7 @@
 						</div>
 						<div class="meta-item">
 							<h4>Response Time</h4>
-							<p>Within 24â€”48 hours</p>
+							<p>Within 24-48 hours</p>
 						</div>
 						<div class="meta-item">
 							<h4>Direct Line</h4>

@@ -24,7 +24,7 @@
 
 			/* ── Buttons Customization (High Contrast Rectangular) ── */
 			#one .actions { margin-top: 2.5em; }
-			#one .actions .button {
+			#main .button {
 				display: inline-flex !important;
 				align-items: center !important;
 				justify-content: center !important;
@@ -39,15 +39,15 @@
 				transition: all 0.2s ease !important;
 				box-shadow: none !important;
 			}
-			#one .actions .button:hover {
+			#main .button:hover {
 				background: #111 !important;
 				color: #fff !important;
 			}
-			#one .actions .button.primary {
+			#main .button.primary {
 				background: #111 !important;
 				color: #fff !important;
 			}
-			#one .actions .button.primary:hover {
+			#main .button.primary:hover {
 				background: #e63946 !important;
 				border-color: #e63946 !important;
 				color: #fff !important;
@@ -108,11 +108,10 @@
 				display: flex; width: 100%; height: 100%;
 			}
 			.modal-visuals {
-				flex: 6; background: #000; overflow-y: auto; padding: 0;
-				display: flex; flex-direction: column; gap: 4px;
+				flex: 0 0 55%; background: #111; position: relative; overflow: hidden;
 			}
 			.modal-visuals img, .modal-visuals video {
-				width: 100%; height: auto; display: block; object-fit: contain;
+				max-width: 100%; max-height: 100%; display: block; object-fit: contain;
 			}
 			.modal-details {
 				flex: 4; background: #fff; overflow-y: auto; padding: 3em 4em;
@@ -200,7 +199,124 @@
 				.timeline-projects { grid-template-columns: 1fr; }
 				.proj-card.full { grid-column: 1; }
 			}
-		</style>
+		
+			#main > section.view-resume,
+			#main > section.view-contact {
+				border-top: 0 !important;
+				margin-top: 0 !important;
+				padding-top: 0 !important;
+			}
+			#main .button.btn-square-icon::before { margin-right: 0 !important; margin-left: 0 !important; }
+			/* Spacing: match deployed robotwar05.github.io */
+			@media screen and (min-width: 981px) {
+				#main { padding: 8em 3em 4em 3em !important; }
+				/* When contact or resume is active, reduce padding using :has pseudo-class */
+				body:has(section.view-contact:not([style*="none"])),
+				body:has(section.view-resume:not([style*="none"])) {
+					#main { padding-top: 3em !important; }
+				}
+			}
+			@media screen and (max-width: 980px) {
+				body:has(section.view-contact:not([style*="none"])),
+				body:has(section.view-resume:not([style*="none"])) {
+					#main { padding-top: 2em !important; }
+				}
+			}
+
+			/* --- Contact Page (exact copy from Contact.html) --- */
+			.contact-header {
+				font-size: 3.5em; font-weight: 800;
+				margin-top: 0.2em; margin-bottom: 0.2em;
+				line-height: 1.1; letter-spacing: -0.02em; color: #1a1a1a;
+			}
+			.contact-subtitle {
+				font-size: 1.25em; color: #666;
+				max-width: 50ch; line-height: 1.5; margin-bottom: 2.5em;
+			}
+			.buttons-container { display: flex; gap: 15px; margin-bottom: 3.5em; flex-wrap: wrap; }
+			.contact-btn {
+				display: inline-flex; align-items: center; justify-content: center;
+				padding: 0.75em 1.5em !important; font-weight: 600;
+				border: 1px solid #e5e5e5 !important; border-radius: 8px !important;
+				background: #fff; color: #1a1a1a !important;
+				text-decoration: none !important; transition: all 0.2s ease;
+				box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+				border-bottom: 1px solid #e5e5e5 !important;
+				height: auto !important; line-height: normal !important;
+			}
+			.contact-btn:hover { border-color: #1a1a1a !important; background: #fcfcfc; transform: translateY(-1px); }
+			.contact-btn.primary {
+				background: #1a1a1a; color: #ffffff !important;
+				border-color: #1a1a1a !important; border-bottom: 1px solid #1a1a1a !important;
+			}
+			.contact-btn.primary:hover { background: #333333; border-color: #333333 !important; }
+			/* Override main.css a{border-bottom:dotted 1px} inside contact section */
+			section.view-contact a.contact-btn {
+				border-bottom: 1px solid #e5e5e5 !important;
+			}
+			section.view-contact a.contact-btn.primary {
+				border-bottom: 1px solid #1a1a1a !important;
+			}
+			.contact-meta {
+				display: grid; grid-template-columns: repeat(4, minmax(250px, 1fr));
+				gap: 2rem; border-top: 1px solid #f0f0f0; padding-top: 2.5rem; margin-top: 1rem;
+				overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;
+			}
+			.contact-meta::-webkit-scrollbar { display: none; }
+			.meta-item {
+				display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;
+			}
+			.meta-item h4 {
+				font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.05em;
+				color: #999; margin: 0 0 0.5em 0 !important; padding: 0 !important;
+				border-bottom: none; white-space: nowrap;
+			}
+			.meta-item p {
+				margin: 0 !important; padding: 0 !important;
+				color: #1a1a1a; font-weight: 500; font-size: 1.1em; white-space: nowrap;
+			}
+			.phone-link { color: #1a1a1a !important; text-decoration: none !important; border-bottom: none !important; transition: color 0.2s; }
+			.phone-link:hover { color: #f56a6a !important; }
+
+			/* --- Carousel Styles --- */
+			.carousel-track {
+				display: flex; height: 100%; width: 100%; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+			}
+			.carousel-slide {
+				flex: 0 0 100%; width: 100%; height: 100%;
+				display: flex; align-items: center; justify-content: center;
+			}
+			.carousel-slide img, .carousel-slide video {
+				max-width: 100%; max-height: 100%; object-fit: contain;
+			}
+
+			.carousel-btn {
+				position: absolute; top: 50%; transform: translateY(-50%);
+				background: rgba(0,0,0,0.6); color: #fff; border: 2px solid rgba(255,255,255,0.2);
+				width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
+				font-size: 1.5em; cursor: pointer; z-index: 10; transition: all 0.3s;
+				border-radius: 50%; backdrop-filter: blur(4px);
+			}
+			.carousel-btn:hover { background: rgba(0,0,0,0.9); border-color: rgba(255,255,255,0.6); }
+			.carousel-btn.prev { left: 20px; }
+			.carousel-btn.next { right: 20px; }
+			.carousel-dots-container {
+				position: absolute; bottom: 20px; left: 0; width: 100%;
+				display: flex; justify-content: center; z-index: 10; pointer-events: none;
+			}
+			.carousel-dots {
+				display: flex; justify-content: center; gap: 10px; 
+				background: rgba(0,0,0,0.6); padding: 10px 16px; border-radius: 20px;
+				backdrop-filter: blur(4px); pointer-events: auto; border: 1px solid rgba(255,255,255,0.1);
+			}
+			.carousel-dot {
+				width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3);
+				cursor: pointer; transition: all 0.3s;
+			}
+			.carousel-dot.active { background: #fff; transform: scale(1.2); box-shadow: 0 0 5px rgba(255,255,255,0.5); }
+
+
+</style>
 	</head>
 	<body class="is-preload is-home">
 
@@ -236,11 +352,10 @@
 
 		<!-- Main -->
 		<div id="main">
-
-			<!-- About -->
-			<section id="one">
+<!-- About -->
+			<section id="one" class="spa-view view-home">
 				<header class="major"><h2>About Me</h2></header>
-				<p style="text-align: justify; line-height: 1.8;">Hello! I am a Control and Automation student focused on embedded firmware, hardware integration, and robotic control. I have built ESP32 and PIC prototypes including a 3DoF suction arm, PID ball-and-beam system, remote-controlled robots, and LVGL HMIs. I am passionate about applying Data Driven and Architecture First mindsets to solve practical robotics challenges.</p>
+				<p style="text-align: justify; line-height: 1.8; text-indent: 2em;">Hello! I am a Control and Automation student focused on embedded firmware, hardware integration, and robotic control. I have built ESP32 and PIC prototypes including a 3DoF suction arm, PID ball-and-beam system, remote-controlled robots, and LVGL HMIs. I am passionate about applying Data Driven and Architecture First mindsets to solve practical robotics challenges.</p>
 				<ul class="actions">
 					<li><a href="#" id="btn-go-home" class="button">Home</a></li>
 					<li><a href="Resume.html" class="button">Resume</a></li>
@@ -249,19 +364,19 @@
 			</section>
 
 			<!-- Projects Timeline -->
-			<section id="two">
+			<section id="two" class="spa-view view-home">
 				<header class="major"><h2>Projects</h2></header>
 				<div class="timeline">
 
-					<!-- ══ 2026 ══ -->
+					<!-- 2026 -->
 					<div class="timeline-year">
 						<div class="timeline-year-label">2026</div>
 						<div class="timeline-projects">
 
 							<div class="proj-card">
-								<img src="https://placehold.co/640x360/111827/49bf9d?text=PickPilot+—+3DoF+Arm" alt="PickPilot"/>
+								<img src="https://placehold.co/640x360/111827/49bf9d?text=PickPilot - 3DoF+Arm" alt="PickPilot"/>
 								<div class="proj-body">
-									<h3>PickPilot — 3DoF Suction Robotic Arm <span class="yr">Jun 2026</span></h3>
+									<h3>PickPilot - 3DoF Suction Robotic Arm <span class="yr">Jun 2026</span></h3>
 									<p>Embedded &amp; Hardware Developer. Team project at VinUniversity AI in Action (Team C2-054).</p>
 									<ul>
 										<li>ESP32-S3 firmware: 3× NEMA17/TB6600 steppers, homing via limit switches, 24V suction via L298N.</li>
@@ -278,7 +393,7 @@
 							<div class="proj-card">
 								<img src="https://placehold.co/640x360/2e1a2e/49bf9d?text=AI+in+Action+—+VinUniversity" alt="AI in Action"/>
 								<div class="proj-body">
-									<h3>AI in Action — VinUniversity <span class="yr">May – Aug 2026</span></h3>
+									<h3>AI in Action — VinUniversity <span class="yr">May - Aug 2026</span></h3>
 									<p>Applied AI Engineering program, project-based robotics track.</p>
 									<ul>
 										<li>Covered LLM application, prompt engineering, RAG, AI Agent, and multi-agent systems.</li>
@@ -295,11 +410,11 @@
 							<div class="proj-card">
 								<img src="https://placehold.co/640x360/0d2137/49bf9d?text=Ball+%26+Beam+PID" alt="Ball and Beam"/>
 								<div class="proj-body">
-									<h3>Ball-and-Beam PID Balancing System <span class="yr">Mar – May 2026</span></h3>
+									<h3>Ball-and-Beam PID Balancing System <span class="yr">Mar - May 2026</span></h3>
 									<p>Personal control-system prototype — closed-loop PID on real hardware.</p>
 									<ul>
 										<li>40 cm beam: ESP32-S3, VL53L1X ToF, MKS SERVO42C (STEP/DIR), OLED display.</li>
-										<li>PID setpoint 20 cm; ball held in 18–22 cm band. Webserver for live param tuning.</li>
+										<li>PID setpoint 20 cm; ball held in 18-22 cm band. Webserver for live param tuning.</li>
 										<li>Debugged I2C instability on 30 cm cable; resolved via signal line stabilisation.</li>
 									</ul>
 									<div class="proj-tags">
@@ -312,7 +427,7 @@
 							<div class="proj-card">
 								<img src="https://placehold.co/640x360/1a2e1a/49bf9d?text=LVGL+HMI+%26+Sensors" alt="LVGL HMI"/>
 								<div class="proj-body">
-									<h3>ESP32 HMI &amp; Sensor Experiments <span class="yr">Feb – Mar 2026</span></h3>
+									<h3>ESP32 HMI &amp; Sensor Experiments <span class="yr">Feb - Mar 2026</span></h3>
 									<p>Home-automation modules — independent embedded sensor nodes.</p>
 									<ul>
 										<li>ESP32-C6: IR transmit/receive to control AC unit at close range.</li>
@@ -327,9 +442,9 @@
 							</div>
 
 						</div>
-					</div><!-- /2026 -->
+					</div><!-- 2026 -->
 
-					<!-- ══ 2025 ══ -->
+					<!-- 2025 -->
 					<div class="timeline-year">
 						<div class="timeline-year-label">2025</div>
 						<div class="timeline-projects">
@@ -354,7 +469,7 @@
 							<div class="proj-card">
 								<img src="https://placehold.co/640x360/1e1a2e/49bf9d?text=ESP-NOW+Car+%2B+Joystick" alt="ESP-NOW Car"/>
 								<div class="proj-body">
-									<h3>ESP-NOW Car & Custom Joystick <span class="yr">Sep – Nov 2025</span></h3>
+									<h3>ESP-NOW Car & Custom Joystick <span class="yr">Sep - Nov 2025</span></h3>
 									<p>Low-latency wireless robotics using ESP-NOW.</p>
 									<ul>
 										<li>Built a remote-controlled car using ESP-NOW for fast, low-latency communication.</li>
@@ -371,7 +486,7 @@
 							<div class="proj-card">
 								<img src="https://placehold.co/640x360/2e1a2e/49bf9d?text=Obstacle+Avoidance+Robot" alt="Obstacle Avoidance Robot"/>
 								<div class="proj-body">
-									<h3>Obstacle Avoidance Robot <span class="yr">Nov – Dec 2025</span></h3>
+									<h3>Obstacle Avoidance Robot <span class="yr">Nov - Dec 2025</span></h3>
 									<p>Autonomous mobile robot using ultrasonic sensing.</p>
 									<ul>
 										<li>Developed an autonomous robot capable of detecting and avoiding obstacles.</li>
@@ -403,9 +518,9 @@
 							</div>
 
 						</div>
-					</div><!-- /2025 -->
+					</div><!-- 2025 -->
 
-					<!-- ══ 2024 ══ -->
+					<!-- 2024 -->
 					<div class="timeline-year">
 						<div class="timeline-year-label">2024</div>
 						<div class="timeline-projects">
@@ -443,9 +558,9 @@
 							</div>
 
 						</div>
-					</div><!-- /2024 -->
+					</div><!-- 2024 -->
 
-					<!-- ══ 2023 ══ -->
+					<!-- 2023 -->
 					<div class="timeline-year">
 						<div class="timeline-year-label">2023</div>
 						<div class="timeline-projects">
@@ -483,12 +598,56 @@
 							</div>
 
 						</div>
-					</div><!-- /2023 -->
+					</div><!-- 2023 -->
 
 				</div><!-- /timeline -->
 			</section>
+<section id="one" class="spa-view view-resume" style="display:none;">
+				<div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+					<a href="index.html" class="button icon solid fa-arrow-left">Back</a>
+					<a href="assets/docs/NguyenVietHoangLuong_Embedded_Robotics.pdf" download class="button primary icon solid fa-book btn-square-icon" style="padding: 0 !important; width: 2.4em !important; min-width: 2.4em !important;" title="Download Resume"></a>
+				</div>
 
-		</div><!-- /main -->
+				<div style="max-width: 980px; margin: 0 auto; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+					<iframe src="assets/docs/NguyenVietHoangLuong_Embedded_Robotics.pdf#view=FitH" width="100%" height="1150px" style="border: none; display: block;"></iframe>
+				</div>
+			</section>
+<section id="one" class="spa-view view-contact" style="display:none;">
+				<div style="margin-bottom: 2.5em;">
+					<a href="index.html" class="button icon solid fa-arrow-left" style="box-shadow: none;">Back</a>
+				</div>
+
+				<div>
+					<h1 class="contact-header">Let's connect.</h1>
+					<p class="contact-subtitle">Available for engineering collaboration and technical discussions.</p>
+
+					<div class="buttons-container">
+						<a href="https://mail.google.com/mail/?view=cm&fs=1&to=nguyenviethoangluong@gmail.com" target="_blank" class="contact-btn primary">Email me</a>
+						<a href="https://www.linkedin.com/in/luong-nguyen-bbba84284/" target="_blank" class="contact-btn">LinkedIn</a>
+						<a href="https://github.com/RobotWar05" target="_blank" class="contact-btn">GitHub</a>
+					</div>
+
+					<div class="contact-meta">
+						<div class="meta-item">
+							<h4>Location</h4>
+							<p>Hanoi, Vietnam</p>
+						</div>
+						<div class="meta-item">
+							<h4>Languages</h4>
+							<p>English, Vietnamese</p>
+						</div>
+						<div class="meta-item">
+							<h4>Response Time</h4>
+							<p>Within 24-48 hours</p>
+						</div>
+						<div class="meta-item">
+							<h4>Direct Line</h4>
+							<p><a href="#" class="phone-link" onclick="navigator.clipboard.writeText('+84 392176769'); alert('Phone number copied!'); return false;" title="Click to copy">+84 392176769</a></p>
+						</div>
+					</div>
+				</div>
+			</section>
+</div><!-- /main -->
 
 		<!-- Footer -->
 		<footer id="footer">
@@ -608,31 +767,43 @@
 
 					wrap.addEventListener('click', () => {
 						const bodyHtml = card.querySelector('.proj-body').innerHTML;
-						let visualsHtml = '';
+						let slidesHtml = '';
+						let dotsHtml = '';
 						
+						let items = [];
 						if (mediaData && mediaData.media && mediaData.media.length > 0) {
-							mediaData.media.forEach((item) => {
-								if (item.type === 'img') {
-									visualsHtml += `<img src="${item.src}" />`;
-								} else if (item.type === 'video') {
-									visualsHtml += `<video controls><source src="${item.src}" type="video/mp4"></video>`;
-								}
-							});
+							items = mediaData.media;
 						} else {
-							const fallbackImg = img.getAttribute('src');
-							visualsHtml = `
-								<img src="${fallbackImg}" />
-								<div style="text-align: center; padding: 4em 2em; background: #111;">
-									<h3 style="color: #e63946; margin-bottom: 0.5em; font-size:1.5em;">&#128679; Coming Soon</h3>
-									<p style="color: #888; font-size: 1.1em; margin:0;">Real project pictures and videos are being updated.</p>
-								</div>
+							items = [{type: 'img', src: img.getAttribute('src')}];
+						}
+
+						items.forEach((item, index) => {
+							let inner = '';
+							if (item.type === 'img') {
+								inner = `<img src="${item.src}" />`;
+							} else if (item.type === 'video') {
+								inner = `<video controls><source src="${item.src}" type="video/mp4"></video>`;
+							}
+							slidesHtml += `<div class="carousel-slide">${inner}</div>`;
+							dotsHtml += `<div class="carousel-dot ${index === 0 ? 'active' : ''}" onclick="event.stopPropagation(); window.goToSlide(${index})"></div>`;
+						});
+
+						let controlsHtml = '';
+						if (items.length > 1) {
+							controlsHtml = `
+								<button class="carousel-btn prev" onclick="event.stopPropagation(); window.changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+								<button class="carousel-btn next" onclick="event.stopPropagation(); window.changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+								<div class="carousel-dots-container"><div class="carousel-dots">${dotsHtml}</div></div>
 							`;
 						}
 
 						document.getElementById('modal-content-area').innerHTML = `
 							<div class="modal-split">
-								<div class="modal-visuals">
-									${visualsHtml}
+								<div class="modal-visuals" id="modal-carousel-container">
+									<div class="carousel-track" id="modal-carousel-track">
+										${slidesHtml}
+									</div>
+									${controlsHtml}
 								</div>
 								<div class="modal-details">
 									<div class="modal-actions">
@@ -646,8 +817,16 @@
 							</div>
 						`;
 						
+						window.currentSlideIndex = 0;
+						window.totalSlides = items.length;
+
 						document.getElementById('project-modal').classList.add('active');
 						document.body.classList.add('modal-open');
+						// Reset track position after DOM is updated
+						requestAnimationFrame(() => {
+							const track = document.getElementById('modal-carousel-track');
+							if (track) track.style.transform = 'translateX(0%)';
+						});
 					});
 				});
 
@@ -663,8 +842,38 @@
 				});
 				document.addEventListener('keydown', (e) => {
 					if (e.key === "Escape") closeModal();
+					if (e.key === "ArrowRight") { if (window.totalSlides > 1) window.changeSlide(1); }
+					if (e.key === "ArrowLeft") { if (window.totalSlides > 1) window.changeSlide(-1); }
 				});
 			});
+		</script>
+
+		<script>
+			// Carousel global functions
+			window.currentSlideIndex = 0;
+			window.totalSlides = 0;
+
+			window.updateCarousel = function() {
+				const track = document.getElementById('modal-carousel-track');
+				if (!track) return;
+				track.style.transform = 'translateX(-' + (window.currentSlideIndex * 100) + '%)';
+				document.querySelectorAll('.carousel-dot').forEach(function(dot, i) {
+					dot.classList.toggle('active', i === window.currentSlideIndex);
+				});
+				document.querySelectorAll('#modal-carousel-track video').forEach(function(v) { v.pause(); });
+			};
+
+			window.changeSlide = function(dir) {
+				window.currentSlideIndex += dir;
+				if (window.currentSlideIndex < 0) window.currentSlideIndex = window.totalSlides - 1;
+				if (window.currentSlideIndex >= window.totalSlides) window.currentSlideIndex = 0;
+				window.updateCarousel();
+			};
+
+			window.goToSlide = function(index) {
+				window.currentSlideIndex = index;
+				window.updateCarousel();
+			};
 		</script>
 
 		<script>
@@ -685,5 +894,6 @@
 			});
 		</script>
 
-	</body>
+	<script src="assets/js/spa.js"></script>
+</body>
 </html>

@@ -4,22 +4,6 @@
     "type": "split",
     "children": [
       {
-        "id": "b04a765a4583b73a",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "50781145b2e83209",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "Tab mới"
-            }
-          }
-        ]
-      },
-      {
         "id": "3e0fe3d5d198eb79",
         "type": "tabs",
         "children": [
@@ -166,13 +150,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Chào mừng.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Đề cương của Chào mừng"
+              "title": "Đề cương"
             }
           }
         ]
@@ -193,19 +176,21 @@
       "bases:Tạo cơ sở mới": false
     }
   },
-  "active": "1b0bb7bc6a132e0a",
+  "active": "657c2a2cca936d30",
   "lastOpenFiles": [
-    "04_Changelog/Version_History.md",
-    "03_Developer_Guide/How_To_Edit.md",
+    "implementation_plan.md",
+    "03_Developer_Guide/Strata_CSS_Quirks.md",
     "02_Design_System/Visual_Rules.md",
     "01_Architecture/Component_Structure.md",
+    "Chào mừng.md",
+    "04_Changelog/Version_History.md",
+    "03_Developer_Guide/How_To_Edit.md",
     "Home.md",
     "04_Changelog",
     "03_Developer_Guide",
     "02_Design_System",
     "01_Architecture",
     "home",
-    "index",
-    "Chào mừng.md"
+    "index"
   ]
 }

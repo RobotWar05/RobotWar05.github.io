@@ -1,29 +1,36 @@
----
-title: Lịch Sử Phiên Bản
+﻿---
+title: Lá»‹ch Sá»­ PhiÃªn Báº£n
 tags: [changelog]
 ---
 
-# 📜 Lịch Sử Phiên Bản
+# ðŸ“œ Lá»‹ch Sá»­ PhiÃªn Báº£n
 
-## v2.0 — Tái cấu trúc Component + Knowledge Base
-- **Jekyll Component:** Tách Sidebar, Footer, Head, Scripts, Home Overlay thành 5 file riêng trong `_includes/`. 3 trang HTML chỉ còn chứa nội dung thuần túy.
-- **Obsidian Vault:** Tạo hệ thống tài liệu `my_web/` với 4 nhóm: Architecture, Design System, Developer Guide, Changelog.
-- **README.md:** Tạo file hướng dẫn tại thư mục gốc cho người đến sau.
+## v3.0 — Native Single Page Application (SPA) & Cleanup
+- **Native SPA Architecture:** Gộp hoàn toàn Resume.html và Contact.html vào chung index.html (chỉ dùng thẻ <section> ẩn/hiện bằng Javascript spa.js), triệt tiêu 100% hiện tượng chớp trắng màn hình khi chuyển trang mà không cần dùng đến React hay PJAX.
+- **Bảo toàn CSS Gốc:** Loại bỏ các thẻ <div> bọc ngoài, giữ nguyên cấu trúc #main > section để tái sử dụng toàn bộ mã CSS mạnh mẽ của Strata (khoảng cách, đường viền).
+- **Design System Fixes:** Đồng bộ nút bấm Đen/Trắng (High Contrast) trên toàn bộ trang. Chỉnh kích thước icon thành hình vuông tinh tế, sửa các lỗi mã hóa Font (encoding).
+- **Dọn dẹp hệ thống:** Loại bỏ hoàn toàn các thư mục/file rác không còn tác dụng sau khi đã quy về 1 trang duy nhất.
 
-## v1.2 — Sửa lỗi giao diện (Edge Cases)
+## v2.0 â€” TÃ¡i cáº¥u trÃºc Component + Knowledge Base
+- **Jekyll Component:** TÃ¡ch Sidebar, Footer, Head, Scripts, Home Overlay thÃ nh 5 file riÃªng trong `_includes/`. 3 trang HTML chá»‰ cÃ²n chá»©a ná»™i dung thuáº§n tÃºy.
+- **Obsidian Vault:** Táº¡o há»‡ thá»‘ng tÃ i liá»‡u `my_web/` vá»›i 4 nhÃ³m: Architecture, Design System, Developer Guide, Changelog.
+- **README.md:** Táº¡o file hÆ°á»›ng dáº«n táº¡i thÆ° má»¥c gá»‘c cho ngÆ°á»i Ä‘áº¿n sau.
 
-| Lỗi | Nguyên nhân | Cách sửa |
+## v1.2 â€” Sá»­a lá»—i giao diá»‡n (Edge Cases)
+
+| Lá»—i | NguyÃªn nhÃ¢n | CÃ¡ch sá»­a |
 |---|---|---|
-| Ảnh bị bầu dục | Ảnh JPEG hình chữ nhật + `border-radius: 100%` không đủ | Thêm `aspect-ratio: 1/1` + `overflow: hidden` |
-| Sidebar dịch phải khi sang Contact | Trang ít nội dung → scrollbar biến mất → viewport rộng thêm 15px | `html { overflow-y: scroll; }` |
-| PDF có 2 viền đen 2 bên | Dùng `#zoom=120` cố định → không phù hợp mọi màn hình | Đổi sang `#view=FitH` + bọc `max-width: 980px` |
-| Chữ Sidebar bị nhỏ hơn Resume | Có `font-size: 0.85em` inline trên `<span>` | Xóa thẻ `<span>` inline, đồng bộ HTML y hệt Resume |
-| Phần phải bị co lại | `main.css` có `max-width: 50em` trên `#main` | Override: `max-width: none` |
+| áº¢nh bá»‹ báº§u dá»¥c | áº¢nh JPEG hÃ¬nh chá»¯ nháº­t + `border-radius: 100%` khÃ´ng Ä‘á»§ | ThÃªm `aspect-ratio: 1/1` + `overflow: hidden` |
+| Sidebar dá»‹ch pháº£i khi sang Contact | Trang Ã­t ná»™i dung â†’ scrollbar biáº¿n máº¥t â†’ viewport rá»™ng thÃªm 15px | `html { overflow-y: scroll; }` |
+| PDF cÃ³ 2 viá»n Ä‘en 2 bÃªn | DÃ¹ng `#zoom=120` cá»‘ Ä‘á»‹nh â†’ khÃ´ng phÃ¹ há»£p má»i mÃ n hÃ¬nh | Äá»•i sang `#view=FitH` + bá»c `max-width: 980px` |
+| Chá»¯ Sidebar bá»‹ nhá» hÆ¡n Resume | CÃ³ `font-size: 0.85em` inline trÃªn `<span>` | XÃ³a tháº» `<span>` inline, Ä‘á»“ng bá»™ HTML y há»‡t Resume |
+| Pháº§n pháº£i bá»‹ co láº¡i | `main.css` cÃ³ `max-width: 50em` trÃªn `#main` | Override: `max-width: none` |
 
-## v1.1 — Apple Hero & Curtain Reveal
-- **Apple Hero Landing:** Thiết kế lại màn hình chờ: chữ to 5em, subtitle Apple gray `#a1a1a6`, nút Pill Liquid Glass với `backdrop-filter: blur`.
-- **Curtain Reveal:** Bỏ hiệu ứng `opacity` (gây ám chữ/ghosting). Dùng `translateY(-100vh)` — tấm rèm bay lên/xuống, hai lớp nội dung không bao giờ chồng nhau.
+## v1.1 â€” Apple Hero & Curtain Reveal
+- **Apple Hero Landing:** Thiáº¿t káº¿ láº¡i mÃ n hÃ¬nh chá»: chá»¯ to 5em, subtitle Apple gray `#a1a1a6`, nÃºt Pill Liquid Glass vá»›i `backdrop-filter: blur`.
+- **Curtain Reveal:** Bá» hiá»‡u á»©ng `opacity` (gÃ¢y Ã¡m chá»¯/ghosting). DÃ¹ng `translateY(-100vh)` â€” táº¥m rÃ¨m bay lÃªn/xuá»‘ng, hai lá»›p ná»™i dung khÃ´ng bao giá» chá»“ng nhau.
 
-## v1.0 — Khởi tạo Portfolio
-- Chuyển đổi template Strata (html5up.net) thành Portfolio cá nhân về Embedded & Automation Robotics.
-- Thêm 6 project, thêm trang Resume (PDF), thêm trang Contact.
+## v1.0 â€” Khá»Ÿi táº¡o Portfolio
+- Chuyá»ƒn Ä‘á»•i template Strata (html5up.net) thÃ nh Portfolio cÃ¡ nhÃ¢n vá» Embedded & Automation Robotics.
+- ThÃªm 6 project, thÃªm trang Resume (PDF), thÃªm trang Contact.
+
