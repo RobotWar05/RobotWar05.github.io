@@ -487,3 +487,8 @@
 				}
 			}
 
+
+/* Footer contrast enhancements */
+#footer { background-color: rgba(0, 0, 0, 0.85) !important; background-blend-mode: multiply; }
+#footer .icons a { color: rgba(255, 255, 255, 0.9) !important; transition: color 0.2s ease; }
+#footer .icons a:hover { color: #49bf9d !important; }
