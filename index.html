@@ -8,7 +8,12 @@
 		<link rel="stylesheet" href="assets/css/home-overlay.css" />
 		<link href="https://placehold.co/32x32/png?text=L" rel="icon">
 		<style>
-			/* ── Override Strata layout to make cards larger ── */
+			/* Layout tweaks for project cards */
+			.proj-card .proj-body ul { display: none; }
+			.proj-card h3 { display: flex; justify-content: space-between; align-items: baseline; gap: 1em; }
+			.proj-card h3 .yr { flex-shrink: 0; margin-left: auto; text-align: right; }
+			
+			/* 🛠️ Override Strata layout to make cards larger 🛠️ */
 			@media screen and (min-width: 981px) {
 				#main { padding: 8em 2.5em 4em 2.5em !important; }
 				#one p, #one .actions { padding: 0 3em; }
