@@ -1,0 +1,145 @@
+		<style>
+			video {
+			  width: 100%;
+			}
+			
+			/* --- APPLE STYLE HOME OVERLAY --- */
+			#home-landing {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				z-index: 10000;
+				text-align: center;
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+				
+				background-color: #1f1815;
+				background-image: url("assets/css/images/overlay.png"), url("images/bg.jpg");
+				background-position: top left, center center;
+				background-repeat: repeat, no-repeat;
+				background-size: auto, cover; 
+				
+				transform: translateY(-100vh);
+				opacity: 1;
+				pointer-events: none;
+				transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+			}
+			
+			body.is-home #home-landing {
+				transform: translateY(0);
+				pointer-events: auto;
+			}
+
+			.home-avatar-wrapper {
+				width: 120px;
+				height: 120px;
+				border-radius: 50%;
+				margin: 0 auto 1.5em auto;
+				overflow: hidden;
+				box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+			}
+
+			.home-avatar {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center 15%;
+				transform: scale(2.2);
+				display: block;
+			}
+			
+			.home-title {
+				font-size: 5em;
+				line-height: 1.1;
+				font-weight: 700;
+				letter-spacing: -0.04em;
+				color: #ffffff;
+				margin-bottom: 0.1em;
+			}
+
+			.home-subtitle {
+				font-size: 1.4em;
+				line-height: 1.5;
+				color: #a1a1a6; /* Apple classic gray */
+				font-weight: 400;
+				max-width: 600px;
+				margin: 0 auto 2.5em auto;
+				letter-spacing: -0.01em;
+			}
+
+			/* Native Strata Overrides */
+			#header, #main, #footer {
+				transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1) !important;
+			}
+			body.is-home #header {
+				opacity: 0;
+				transform: translateY(50px);
+				pointer-events: none;
+			}
+			body.is-home #main {
+				opacity: 0;
+				transform: translateY(50px);
+				pointer-events: none;
+			}
+			body.is-home #footer {
+				opacity: 0;
+				pointer-events: none;
+			}
+			body.is-home {
+				overflow-x: hidden;
+				overflow-y: hidden;
+			}
+
+			/* Liquid Glass Pill Button */
+			.big-project-btn {
+				background: rgba(255, 255, 255, 0.08);
+				backdrop-filter: saturate(180%) blur(20px);
+				-webkit-backdrop-filter: saturate(180%) blur(20px);
+				border: 1px solid rgba(255, 255, 255, 0.15) !important;
+				color: #fff !important;
+				font-size: 1.1em;
+				padding: 1.2em 3em !important;
+				border-radius: 50px;
+				cursor: pointer;
+				transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+				font-weight: 500;
+				letter-spacing: 1px;
+				display: inline-flex;
+				align-items: center;
+				gap: 12px;
+				box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+			}
+			.big-project-btn i {
+				font-size: 1.1em;
+				transition: transform 0.4s ease;
+			}
+			.big-project-btn:hover {
+				background: rgba(255, 255, 255, 0.15) !important;
+				border-color: rgba(255, 255, 255, 0.3) !important;
+				transform: scale(1.02);
+				box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+			}
+			.big-project-btn:hover i {
+				transform: translateX(4px);
+			}
+		</style>
+
+		<!-- Apple Style Home Overlay -->
+		<div id="home-landing">
+			<div class="home-avatar-wrapper">
+				<img src="images/me.JPEG" class="home-avatar" alt=""/>
+			</div>
+			<h1 class="home-title">Hoang Luong.</h1>
+			<p class="home-subtitle">
+				B.E. in Control Engineering & Automation.<br/>
+				Specializing in Embedded Systems and AI in Action.
+			</p>
+			<button id="btn-enter-portfolio" class="big-project-btn">
+				Explore Projects <i class="icon solid fa-chevron-right"></i>
+			</button>
+		</div>

@@ -1,310 +1,114 @@
-<!DOCTYPE HTML>
-<!--
-	Strata by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Nguyen Viet Hoang Luong: Portfolio</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link href="https://placehold.co/32x32/png?text=L" rel="icon">
-		<style>
-			video {
-			  width: 100%;
-			}
-			
-			/* Home State Transitions */
-			#header, #main, #footer {
-				transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1) !important;
-			}
-			
-			body.is-home {
-				overflow-x: hidden;
-			}
-			
-			body.is-home #header {
-				width: 100vw !important;
-			}
-			
-			/* Lock text to the exact same position as native 35% sidebar */
-			body.is-home #header .inner {
-				margin-right: 65% !important;
-				text-align: right !important;
-			}
-			
-			body.animating-flip-in #header .inner {
-				animation: flipIn 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-			}
-			
-			body.animating-flip-out #header .inner {
-				animation: flipOut 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-			}
+---
+layout: default
+title: "Nguyen Viet Hoang Luong: Portfolio"
+is_home: true
+---
+<!-- One -->
+	<section id="one">
+		<header class="major">
+			<font color="black"><h2>About Me</font></h2>
+		</header>
+		<font color="black"><p style="text-indent: 40px">Hello! I am a Control and Automation student focused on embedded firmware, hardware integration, and robotic control. I have built ESP32 and PIC prototypes including a 3DoF suction arm, PID ball-and-beam system, remote-controlled robots, and LVGL HMIs. I am passionate about applying Data Driven and Architecture First mindsets to solve practical robotics challenges. Have a look at some of my projects below!</p></font>
+		<ul class="actions">
+			<li><a href="#" id="btn-go-home" class="button"><font color="black">Home</font></a></li>
+			<li><a href="Resume.html" class="button"><font color="black">Resume</font></a></li>
+			<li><a href="Contact.html" class="button primary">Contact</a></li>
+		</ul>
+	</section>
 
-			@keyframes flipOut {
-				0% { transform: perspective(1000px) rotateY(-90deg) scale(0.9); opacity: 0; }
-				100% { transform: perspective(1000px) rotateY(0deg) scale(1); opacity: 1; }
-			}
-			
-			@keyframes flipIn {
-				0% { transform: perspective(1000px) rotateY(90deg) scale(0.9); opacity: 0; }
-				100% { transform: perspective(1000px) rotateY(0deg) scale(1); opacity: 1; }
-			}
-			
-			body.is-home #main {
-				transform: translateX(100vw);
-				position: fixed;
-				top: 0;
-				width: 65%;
-				height: 100vh;
-			}
+<!-- Two -->
+	<section id="two">
+	<header class="major">
+		<h2><font color="black">Projects</font></h2></header>
+		<div class="row">
+			<!-- Project 1 -->
+			<article class="col-6 col-12-xsmall work-item">
+				<a href="https://placehold.co/800x600/png?text=PickPilot+Demo" class="image fit thumb"><img src="https://placehold.co/600x400/png?text=PickPilot" alt="" /></a>
+				<h3 style="font-family:verdana;"><font color="black"><u>PickPilot: 3DoF Suction Robotic Arm</u></font></h3>
+				<p><font color="black">Built hardware and firmware for web-controlled target movement, suction pickup, transfer, and release.<br/>
+				<ul>
+				  <li><p>Integrated ESP32-S3, NEMA 17/TB6600 motion hardware, 24V vacuum, L298N suction driver.</p></li>
+				  <li><p>Mapped web UI target points to the physical robot workspace for repeatable pick-and-place.</p></li>
+				</ul></font><p>
+				<code><font color="Red">ESP32-S3</font></code>
+				<code><font color="Red">PlatformIO</font></code>	
+				<code><font color="Red">Hardware</font></code>	
+				</p>
+			</article>
 
-			body.is-home #footer {
-				transform: translateX(-100%);
-				opacity: 0;
-			}
+			<!-- Project 2 -->
+			<article class="col-6 col-12-xsmall work-item">
+				<a href="https://placehold.co/800x600/png?text=Ball+and+Beam" class="image fit thumb"><img src="https://placehold.co/600x400/png?text=Ball+and+Beam" alt="" /></a>
+				<h3 style="font-family:verdana;"><font color="black"><u>Ball-and-Beam PID Balancing System</u></font></h3>
+				<p><font color="black">Personal control-system prototype built to explore closed-loop balancing mechanics.<br/>
+				<ul>
+				  <li><p>Built a 40 cm prototype with ESP32-S3, VL53L1X sensing, MKS SERVO42C actuation, and OLED.</p></li>
+				  <li><p>Tuned PID control to move the ball toward a 20 cm setpoint and hold it near an 18-22 cm band.</p></li>
+				</ul></font><p>
+				<code><font color="Red">PID Control</font></code>
+				<code><font color="Red">VL53L1X</font></code>
+				<code><font color="Red">ESP32-S3</font></code>
+				</p>
+			</article>
 
-			/* Big Project Button Container */
-			#home-overlay {
-				position: absolute;
-				top: 0;
-				right: 0;
-				width: 65%; /* Mặc định bằng độ rộng của main */
-				height: 100vh;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				opacity: 0;
-				pointer-events: none;
-				transition: opacity 0.8s ease;
-				background: transparent;
-			}
-			body.is-home #home-overlay {
-				opacity: 1;
-				pointer-events: auto;
-				transition-delay: 0.2s;
-			}
+			<!-- Project 3 -->
+			<article class="col-6 col-12-xsmall work-item">
+				<a href="https://placehold.co/800x600/png?text=RC+Robot" class="image fit thumb"><img src="https://placehold.co/600x400/png?text=RC+Robot" alt="" /></a>
+				<h3 style="font-family:verdana;"><font color="black"><u>ESP32 Remote-Controlled Robot System</u></font></h3>
+				<p><font color="black">Personal embedded robotics project featuring camera feedback and remote interaction.<br/>
+				<ul>
+				  <li><p>Built ESP32 robot control with local web UI, camera preview, and relay-driven water pump.</p></li>
+				  <li><p>Built an ESP-NOW joystick control link after observing lag in HTTP-based control.</p></li>
+				</ul></font><p>
+				<code><font color="Red">ESP-NOW</font></code>
+				<code><font color="Red">ESP32-CAM</font></code>
+				<code><font color="Red">Sensors</font></code>
+				</p>
+			</article>
 
-			.big-project-btn {
-				background: rgba(20, 20, 20, 0.5);
-				backdrop-filter: blur(15px);
-				-webkit-backdrop-filter: blur(15px);
-				border: 1px solid rgba(255, 255, 255, 0.1) !important;
-				color: #fff !important;
-				font-size: 1.1em;
-				padding: 2.5em 4em !important;
-				border-radius: 12px;
-				cursor: pointer;
-				transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-				text-transform: uppercase;
-				letter-spacing: 4px;
-				font-weight: 500;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				gap: 20px;
-			}
-			.big-project-btn i {
-				font-size: 3em;
-				transition: transform 0.4s ease;
-				opacity: 0.9;
-			}
-			.big-project-btn:hover {
-				background: rgba(40, 40, 40, 0.7) !important;
-				border-color: rgba(255, 255, 255, 0.3) !important;
-				transform: scale(1.02) translateY(-4px);
-				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
-			}
-			.big-project-btn:hover i {
-				transform: rotate(10deg) scale(1.05);
-				opacity: 1;
-			}
-		</style>
-	</head>
-	<body class="is-preload is-home">
+			<!-- Project 4 -->
+			<article class="col-6 col-12-xsmall work-item">
+				<a href="https://placehold.co/800x600/png?text=Leanbot" class="image fit thumb"><img src="https://placehold.co/600x400/png?text=Leanbot" alt="" /></a>
+				<h3 style="font-family:verdana;"><font color="black"><u>Leanbot Programming Competition</u></font></h3>
+				<p><font color="black">Led a team to secure 3rd Prize in a competitive autonomous robot challenge (2023).<br/>
+				<ul>
+				  <li><p>Designed robot navigation strategy for map traversal and obstacle avoidance.</p></li>
+				  <li><p>Utilized ultrasonic sensors, IR sensors, stepper motors, and A4988 drivers.</p></li>
+				</ul></font><p>
+				<code><font color="Red">Navigation</font></code>
+				<code><font color="Red">A4988</font></code>
+				<code><font color="Red">Team Leader</font></code>
+				</p>
+			</article>
 
-		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="index.html" class="image avatar"><img src="https://placehold.co/150x150/png?text=Avatar" alt=""/></a>
-					<h1><strong>Nguyen Viet Hoang Luong</strong><br/><br/>
-					
-					<span style="font-size: 0.85em; font-weight: normal; line-height: 1.8; display: inline-block;">
-					Embedded Systems<br/>
-					<br/><b>B.E. in Control Engineering & Automation</b><br/>
-					<i style="opacity: 0.8;">Hanoi University of Mining and Geology</i><br/><br/>
-					<b>AI in Action Engineering</b><br/>
-					<i style="opacity: 0.8;">VinUniversity</i>
-					</span></h1>
-				</div>
-				
-				<div id="home-overlay">
-					<button id="btn-enter-portfolio" class="big-project-btn">
-						<i class="icon solid fa-microchip"></i> PROJECTS
-					</button>
-				</div>
-			</header>
+			<!-- Project 5 -->
+			<article class="col-6 col-12-xsmall work-item">
+				<a href="https://placehold.co/800x600/png?text=LVGL+HMI" class="image fit thumb"><img src="https://placehold.co/600x400/png?text=LVGL+HMI" alt="" /></a>
+				<h3 style="font-family:verdana;"><font color="black"><u>Advanced HMI & Sensor Integration</u></font></h3>
+				<p><font color="black">Developed various UI/UX solutions for embedded touchscreens and smart devices.<br/>
+				<ul>
+				  <li><p>Built ESP32-C6 IR, AHT30/OLED, LVGL HMI, relay-control, and sensor experiments.</p></li>
+				  <li><p>Focused on providing seamless interaction between users and physical hardware.</p></li>
+				</ul></font><p>
+				<code><font color="Red">LVGL</font></code>
+				<code><font color="Red">OLED</font></code>
+				<code><font color="Red">ESP32-C6</font></code>
+				</p>
+			</article>
 
-		<!-- Main -->
-			<div id="main">
-
-				<!-- One -->
-					<section id="one">
-						<header class="major">
-							<font color="black"><h2>About Me</font></h2>
-						</header>
-						<font color="black"><p style="text-indent: 40px">Hello! I am a Control and Automation student focused on embedded firmware, hardware integration, and robotic control. I have built ESP32 and PIC prototypes including a 3DoF suction arm, PID ball-and-beam system, remote-controlled robots, and LVGL HMIs. I am passionate about applying Data Driven and Architecture First mindsets to solve practical robotics challenges. Have a look at some of my projects below!</p></font>
-                        <ul class="actions">
-							<li><a href="#" id="btn-go-home" class="button"><font color="black">Home</font></a></li>
-							<li><a href="Resume.html" class="button"><font color="black">Resume</font></a></li>
-							<li><a href="Contact.html" class="button primary">Contact</a></li>
-						</ul>
-					</section>
-
-				<!-- Two -->
-					<section id="two">
-					<header class="major">
-						<h2><font color="black">Projects</font></h2></header>
-						<div class="row">
-							<!-- Project 1 -->
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="https://placehold.co/800x600/png?text=PickPilot+Demo" class="image fit thumb"><img src="https://placehold.co/600x400/png?text=PickPilot" alt="" /></a>
-								<h3 style="font-family:verdana;"><font color="black"><u>PickPilot: 3DoF Suction Robotic Arm</u></font></h3>
-								<p><font color="black">Built hardware and firmware for web-controlled target movement, suction pickup, transfer, and release.<br/>
-								<ul>
-                                  <li><p>Integrated ESP32-S3, NEMA 17/TB6600 motion hardware, 24V vacuum, L298N suction driver.</p></li>
-								  <li><p>Mapped web UI target points to the physical robot workspace for repeatable pick-and-place.</p></li>
-                                </ul></font><p>
-                                <code><font color="Red">ESP32-S3</font></code>
-								<code><font color="Red">PlatformIO</font></code>	
-								<code><font color="Red">Hardware</font></code>	
-								</p>
-							</article>
-
-							<!-- Project 2 -->
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="https://placehold.co/800x600/png?text=Ball+and+Beam" class="image fit thumb"><img src="https://placehold.co/600x400/png?text=Ball+and+Beam" alt="" /></a>
-								<h3 style="font-family:verdana;"><font color="black"><u>Ball-and-Beam PID Balancing System</u></font></h3>
-								<p><font color="black">Personal control-system prototype built to explore closed-loop balancing mechanics.<br/>
-								<ul>
-								  <li><p>Built a 40 cm prototype with ESP32-S3, VL53L1X sensing, MKS SERVO42C actuation, and OLED.</p></li>
-								  <li><p>Tuned PID control to move the ball toward a 20 cm setpoint and hold it near an 18-22 cm band.</p></li>
-                                </ul></font><p>
-                                <code><font color="Red">PID Control</font></code>
-								<code><font color="Red">VL53L1X</font></code>
-								<code><font color="Red">ESP32-S3</font></code>
-								</p>
-							</article>
-
-							<!-- Project 3 -->
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="https://placehold.co/800x600/png?text=RC+Robot" class="image fit thumb"><img src="https://placehold.co/600x400/png?text=RC+Robot" alt="" /></a>
-								<h3 style="font-family:verdana;"><font color="black"><u>ESP32 Remote-Controlled Robot System</u></font></h3>
-								<p><font color="black">Personal embedded robotics project featuring camera feedback and remote interaction.<br/>
-								<ul>
-								  <li><p>Built ESP32 robot control with local web UI, camera preview, and relay-driven water pump.</p></li>
-								  <li><p>Built an ESP-NOW joystick control link after observing lag in HTTP-based control.</p></li>
-                                </ul></font><p>
-                                <code><font color="Red">ESP-NOW</font></code>
-								<code><font color="Red">ESP32-CAM</font></code>
-								<code><font color="Red">Sensors</font></code>
-								</p>
-							</article>
-
-							<!-- Project 4 -->
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="https://placehold.co/800x600/png?text=Leanbot" class="image fit thumb"><img src="https://placehold.co/600x400/png?text=Leanbot" alt="" /></a>
-								<h3 style="font-family:verdana;"><font color="black"><u>Leanbot Programming Competition</u></font></h3>
-								<p><font color="black">Led a team to secure 3rd Prize in a competitive autonomous robot challenge (2023).<br/>
-								<ul>
-								  <li><p>Designed robot navigation strategy for map traversal and obstacle avoidance.</p></li>
-								  <li><p>Utilized ultrasonic sensors, IR sensors, stepper motors, and A4988 drivers.</p></li>
-                                </ul></font><p>
-                                <code><font color="Red">Navigation</font></code>
-								<code><font color="Red">A4988</font></code>
-								<code><font color="Red">Team Leader</font></code>
-								</p>
-							</article>
-
-							<!-- Project 5 -->
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="https://placehold.co/800x600/png?text=LVGL+HMI" class="image fit thumb"><img src="https://placehold.co/600x400/png?text=LVGL+HMI" alt="" /></a>
-								<h3 style="font-family:verdana;"><font color="black"><u>Advanced HMI & Sensor Integration</u></font></h3>
-								<p><font color="black">Developed various UI/UX solutions for embedded touchscreens and smart devices.<br/>
-								<ul>
-								  <li><p>Built ESP32-C6 IR, AHT30/OLED, LVGL HMI, relay-control, and sensor experiments.</p></li>
-								  <li><p>Focused on providing seamless interaction between users and physical hardware.</p></li>
-                                </ul></font><p>
-                                <code><font color="Red">LVGL</font></code>
-								<code><font color="Red">OLED</font></code>
-								<code><font color="Red">ESP32-C6</font></code>
-								</p>
-							</article>
-
-							<!-- Project 6 -->
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="https://placehold.co/800x600/png?text=PIC+Prototypes" class="image fit thumb"><img src="https://placehold.co/600x400/png?text=PIC+Prototypes" alt="" /></a>
-								<h3 style="font-family:verdana;"><font color="black"><u>PIC Microcontroller Prototypes</u></font></h3>
-								<p><font color="black">Explored fundamental embedded systems through low-level 8-bit microcontrollers.<br/>
-								<ul>
-								  <li><p>Built PIC16F887/PIC16F877A boards and custom PCB prototypes.</p></li>
-								  <li><p>Conducted nRF24L01 wireless tests and hardware integrations.</p></li>
-                                </ul></font><p>
-                                <code><font color="Red">PIC16F</font></code>
-								<code><font color="Red">PCB Design</font></code>
-								<code><font color="Red">nRF24L01</font></code>
-								</p>
-							</article>
-						</div>
-					</section>
-
-			</div>
-
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<ul class="icons">
-						<li><a href="https://github.com/RobotWar05" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
-						<li><a href="https://www.linkedin.com/in/luong-nguyen-bbba84284/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-						<li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=nguyenviethoangluong@gmail.com" class="icon solid fa-envelope" target="_blank"><span class="label">Email</span></a></li>
-					</ul>
-
-				</div>
-			</footer>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			
-			<script>
-				if (window.location.hash === '#portfolio') {
-					document.body.classList.remove('is-home');
-				}
-
-				document.getElementById('btn-enter-portfolio').addEventListener('click', function(e) {
-					e.preventDefault();
-					document.body.classList.add('animating-flip-out');
-					document.body.classList.remove('is-home');
-					window.history.pushState(null, null, '#portfolio');
-					window.scrollTo({ top: 0, behavior: 'smooth' });
-					setTimeout(() => document.body.classList.remove('animating-flip-out'), 800);
-				});
-
-				document.getElementById('btn-go-home').addEventListener('click', function(e) {
-					e.preventDefault();
-					document.body.classList.add('animating-flip-in');
-					document.body.classList.add('is-home');
-					window.history.pushState(null, null, ' '); // remove hash
-					window.scrollTo({ top: 0, behavior: 'smooth' });
-					setTimeout(() => document.body.classList.remove('animating-flip-in'), 800);
-				});
-			</script>
-
-	</body>
-</html>
+			<!-- Project 6 -->
+			<article class="col-6 col-12-xsmall work-item">
+				<a href="https://placehold.co/800x600/png?text=PIC+Prototypes" class="image fit thumb"><img src="https://placehold.co/600x400/png?text=PIC+Prototypes" alt="" /></a>
+				<h3 style="font-family:verdana;"><font color="black"><u>PIC Microcontroller Prototypes</u></font></h3>
+				<p><font color="black">Explored fundamental embedded systems through low-level 8-bit microcontrollers.<br/>
+				<ul>
+				  <li><p>Built PIC16F887/PIC16F877A boards and custom PCB prototypes.</p></li>
+				  <li><p>Conducted nRF24L01 wireless tests and hardware integrations.</p></li>
+				</ul></font><p>
+				<code><font color="Red">PIC16F</font></code>
+				<code><font color="Red">PCB Design</font></code>
+				<code><font color="Red">nRF24L01</font></code>
+				</p>
+			</article>
+		</div>
+	</section>

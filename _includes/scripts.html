@@ -1,0 +1,32 @@
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			
+			<script>
+				if (window.location.hash === '#portfolio') {
+					document.body.classList.remove('is-home');
+				}
+
+				var btnPortfolio = document.getElementById('btn-enter-portfolio');
+				if(btnPortfolio) {
+					btnPortfolio.addEventListener('click', function(e) {
+						e.preventDefault();
+						document.body.classList.remove('is-home');
+						window.history.pushState(null, null, '#portfolio');
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+					});
+				}
+
+				var btnGoHome = document.getElementById('btn-go-home');
+				if(btnGoHome) {
+					btnGoHome.addEventListener('click', function(e) {
+						e.preventDefault();
+						document.body.classList.add('is-home');
+						window.history.pushState(null, null, ' '); // remove hash
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+					});
+				}
+			</script>
