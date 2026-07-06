@@ -225,6 +225,23 @@
 							const track = document.getElementById('modal-carousel-track');
 							if (track) track.style.transform = 'translateX(0%)';
 						});
+
+						// Add Touch Swipe Support for mobile
+						const carouselContainer = document.getElementById('modal-carousel-container');
+						if (carouselContainer) {
+							let touchStartX = 0;
+							let touchEndX = 0;
+							carouselContainer.addEventListener('touchstart', e => {
+								touchStartX = e.changedTouches[0].screenX;
+							}, {passive: true});
+							carouselContainer.addEventListener('touchend', e => {
+								touchEndX = e.changedTouches[0].screenX;
+								if (window.totalSlides > 1) {
+									if (touchEndX < touchStartX - 50) window.changeSlide(1);
+									if (touchEndX > touchStartX + 50) window.changeSlide(-1);
+								}
+							}, {passive: true});
+						}
 					});
 				});
 
