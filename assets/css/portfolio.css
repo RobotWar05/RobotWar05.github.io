@@ -189,11 +189,19 @@
 				font-weight: 600; font-family: monospace;
 			}
 			@media (max-width: 768px) {
-				#main { padding: 2em 1.5em !important; }
-				.timeline { padding-left: 45px; }
-				.timeline::before { left: 14px; width: 3px; }
-				.timeline-year::before { left: -36.5px; top: 4px; width: 12px; height: 12px; border-width: 2px; box-shadow: 0 0 0 3px #e0e0e0; margin: 0; }
-				.timeline-year-label { margin-left: -15px; font-size: 1.1em; padding: 4px 14px; }
+				#main { padding: 2em 0.8em !important; }
+				.timeline { padding-left: 15px !important; }
+				.timeline::before { left: 5px !important; width: 2px !important; }
+				.timeline-year::before { 
+					left: -14px !important; 
+					top: 8px !important; 
+					width: 10px !important; 
+					height: 10px !important; 
+					border-width: 2px !important; 
+					box-shadow: 0 0 0 2px #e0e0e0 !important; 
+					margin: 0 !important; 
+				}
+				.timeline-year-label { margin-left: -5px !important; font-size: 0.95em !important; padding: 2px 12px !important; }
 				
 				/* Mobile Project Cards: 2 Columns, No Description/Tags */
 				.timeline-projects { 
