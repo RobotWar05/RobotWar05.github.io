@@ -13,8 +13,8 @@
 		$main = $('#main'),
 		settings = {
 
-			// Parallax background effect?
-				parallax: true,
+		// Parallax background effect?
+				parallax: false,
 
 			// Parallax factor (lower = more intense, higher = less intense).
 				parallaxFactor: 20
