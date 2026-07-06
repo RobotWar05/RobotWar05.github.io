@@ -10,46 +10,131 @@
 		<style>
 			/* ── Override Strata layout to make cards larger ── */
 			@media screen and (min-width: 981px) {
-				#main { padding: 8em 4.5em 4em 4.5em !important; }
+				#main { padding: 8em 2.5em 4em 2.5em !important; }
+				#one p, #one .actions { padding: 0 3em; }
 			}
 			#header {
 				height: 100vh !important;
 			}
 
-			/* ── Buttons Customization (About Me) ── */
+			/* ── Buttons Customization (High Contrast Rectangular) ── */
 			#one .actions { margin-top: 2.5em; }
 			#one .actions .button {
 				display: inline-flex !important;
 				align-items: center !important;
 				justify-content: center !important;
 				height: 2.4em !important;
-				padding: 0 1.6em !important;
+				padding: 0 1.5em !important;
 				background: transparent !important;
-				border: 2px solid #222 !important;
-				color: #222 !important;
+				border: 2px solid #111 !important;
+				color: #111 !important;
+				font-size: 0.95em !important;
 				font-weight: 700 !important;
-				border-radius: 30px !important;
+				border-radius: 4px !important;
 				transition: all 0.2s ease !important;
+				box-shadow: none !important;
 			}
 			#one .actions .button:hover {
-				background: #222 !important;
+				background: #111 !important;
 				color: #fff !important;
 			}
 			#one .actions .button.primary {
-				background: #222 !important;
+				background: #111 !important;
 				color: #fff !important;
 			}
 			#one .actions .button.primary:hover {
-				background: #49bf9d !important;
-				border-color: #49bf9d !important;
+				background: #e63946 !important;
+				border-color: #e63946 !important;
+				color: #fff !important;
 			}
 			
 			/* ── Timeline layout ── */
 			.timeline { position: relative; padding-left: 70px; margin-top: 1.5em; }
 			.timeline::before {
-				content: ''; position: absolute; left: 24px; top: 12px; bottom: 0;
-				width: 3px; background: #e0e0e0;
+				content: ''; position: absolute; left: 20px; top: 12px; bottom: 0;
+				width: 3px; background: rgba(0,0,0,0.08);
 			}
+			
+			/* ── Project Hover & Modal ── */
+			.proj-img-wrap {
+				position: relative; overflow: hidden; cursor: pointer;
+			}
+			.proj-img-wrap img {
+				display: block; width: 100%; transition: transform 0.3s ease;
+			}
+			.proj-img-overlay {
+				position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+				background: rgba(0,0,0,0.5);
+				display: flex; align-items: center; justify-content: center;
+				opacity: 0; transition: opacity 0.3s ease; z-index: 2;
+			}
+			.proj-img-wrap:hover .proj-img-overlay { opacity: 1; }
+			.proj-img-wrap:hover img { transform: scale(1.05); }
+			.view-btn {
+				border: 2px solid #fff; color: #fff; padding: 0.5em 1.5em;
+				border-radius: 4px; font-weight: 600; font-size: 1.1em;
+				backdrop-filter: blur(4px); letter-spacing: 1px;
+			}
+			.modal-overlay {
+				position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+				background: rgba(0,0,0,0.85); z-index: 99999;
+				display: flex; align-items: center; justify-content: center;
+				opacity: 0; visibility: hidden; transition: all 0.3s ease;
+				backdrop-filter: blur(5px);
+			}
+			.modal-overlay.active { opacity: 1; visibility: visible; }
+			.modal-container {
+				background: #fff; width: 95%; max-width: 1400px; height: 95vh;
+				border-radius: 8px; position: relative;
+				transform: translateY(30px); transition: transform 0.3s ease;
+				display: flex; flex-direction: column; overflow: hidden;
+			}
+			.modal-overlay.active .modal-container { transform: translateY(0); }
+			.modal-close {
+				position: absolute; top: 15px; right: 20px; font-size: 2em;
+				color: #999; cursor: pointer; line-height: 1; z-index: 10;
+				transition: color 0.2s;
+			}
+			.modal-close:hover { color: #e63946; }
+			.modal-content {
+				flex: 1; overflow: hidden; padding: 0; display: flex; flex-direction: column;
+			}
+			.modal-split {
+				display: flex; width: 100%; height: 100%;
+			}
+			.modal-visuals {
+				flex: 6; background: #000; overflow-y: auto; padding: 0;
+				display: flex; flex-direction: column; gap: 4px;
+			}
+			.modal-visuals img, .modal-visuals video {
+				width: 100%; height: auto; display: block; object-fit: contain;
+			}
+			.modal-details {
+				flex: 4; background: #fff; overflow-y: auto; padding: 3em 4em;
+			}
+			.modal-details h3 { font-size: 1.8em; margin-bottom: 0.5em; color: #111; }
+			
+			.modal-actions {
+				margin-bottom: 2em; padding-bottom: 1.5em; border-bottom: 1px solid #eee;
+				display: flex; gap: 10px; flex-wrap: wrap;
+			}
+			.modal-actions .button {
+				padding: 0 1.5em; height: 2.5em; line-height: 2.5em; font-size: 0.85em;
+				background: #111; color: #fff !important; border: none; border-radius: 4px;
+			}
+			.modal-actions .button:hover { background: #e63946; }
+
+			body.modal-open { overflow: hidden !important; }
+
+			@media (max-width: 980px) {
+				.modal-split { flex-direction: column; }
+				.modal-visuals { flex: unset; max-height: 50vh; }
+				.modal-details { flex: unset; padding: 1.5em; }
+				.modal-container { width: 95%; height: 95vh; }
+			}
+
+			/* ── End Project Hover & Modal ── */
+
 			.timeline-year { position: relative; margin-top: 3.5em; }
 			.timeline-year:first-child { margin-top: 0; }
 			.timeline-year::before {
@@ -117,7 +202,7 @@
 		<!-- Apple Style Home Overlay -->
 		<div id="home-landing">
 			<div class="home-avatar-wrapper">
-				<img src="images/me.JPEG" class="home-avatar" alt=""/>
+				<img src="pictures/me.JPEG" class="home-avatar" alt=""/>
 			</div>
 			<h1 class="home-title">Hoang Luong.</h1>
 			<p class="home-subtitle">
@@ -132,7 +217,7 @@
 		<!-- Header / Sidebar -->
 		<header id="header">
 			<div class="inner">
-				<a href="index.html" class="image avatar"><img src="images/me.JPEG" alt=""/></a>
+				<a href="index.html" class="image avatar"><img src="pictures/me.JPEG" alt=""/></a>
 				<h1>
 					<strong>Nguyen Viet Hoang Luong</strong><br/><br/>
 					Embedded Systems<br/><br/>
@@ -418,6 +503,165 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
+		<!-- Modal Popup Structure -->
+		<div id="project-modal" class="modal-overlay">
+			<div class="modal-container">
+				<span class="modal-close">&times;</span>
+				<div class="modal-content" id="modal-content-area">
+					<!-- Injected dynamically -->
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// Project Media Data
+			const projectMedia = {
+				"PickPilot": {
+					thumb: "pictures/PickPilot/1_arm.JPEG",
+					media: [{type: 'img', src: 'pictures/PickPilot/1_arm.JPEG'}]
+				},
+				"Ball & Beam": {
+					thumb: "pictures/BallAndBeam/Beam-real.png",
+					media: [
+						{type: 'img', src: 'pictures/BallAndBeam/Beam-real.png'},
+						{type: 'img', src: 'pictures/BallAndBeam/Beam-3D-SolidWorks.png'},
+						{type: 'img', src: 'pictures/BallAndBeam/schematic.png'}
+					]
+				},
+				"LVGL HMI": {
+					thumb: "pictures/HMI_Lvgl/1.JPEG",
+					media: [
+						{type: 'img', src: 'pictures/HMI_Lvgl/1.JPEG'},
+						{type: 'img', src: 'pictures/HMI_Lvgl/2.JPEG'}
+					]
+				},
+				"Webserver Robot": {
+					thumb: "pictures/WebServer_controller_robot/1.JPEG",
+					media: [
+						{type: 'img', src: 'pictures/WebServer_controller_robot/1.JPEG'},
+						{type: 'img', src: 'pictures/WebServer_controller_robot/2.JPEG'},
+						{type: 'img', src: 'pictures/WebServer_controller_robot/3_dashboard.JPEG'},
+						{type: 'img', src: 'pictures/WebServer_controller_robot/4_schematic.JPEG'}
+					]
+				},
+				"Smart Home Node": {
+					thumb: "pictures/ESP32_node/1.JPEG",
+					media: [
+						{type: 'img', src: 'pictures/ESP32_node/1.JPEG'},
+						{type: 'img', src: 'pictures/ESP32_node/3.JPEG'}
+					]
+				},
+				"PIC16F Boards": {
+					thumb: "pictures/PIC/PCB/1.JPEG",
+					media: [
+						{type: 'img', src: 'pictures/PIC/PCB/1_board mở rộng với pic trên altium.JPEG'},
+						{type: 'img', src: 'pictures/PIC/PCB/2.JPEG'},
+						{type: 'img', src: 'pictures/PIC/PCB/3.JPEG'},
+						{type: 'img', src: 'pictures/PIC/PCB/4.JPEG'}
+					]
+				},
+				"nRF24L01 Wireless": {
+					thumb: "pictures/PIC/NRF24l01/1.PNG",
+					media: [
+						{type: 'img', src: 'pictures/PIC/NRF24l01/1.PNG'},
+						{type: 'video', src: 'pictures/PIC/NRF24l01/video1.MOV'}
+					]
+				},
+				"Leanbot Programming": {
+					thumb: "pictures/Leanbot/1.JPEG",
+					media: [
+						{type: 'img', src: 'pictures/Leanbot/1.JPEG'},
+						{type: 'video', src: 'pictures/Leanbot/video1.MP4'}
+					]
+				}
+			};
+
+			// Auto-wrap project images for Hover overlay and attach Modal click events
+			document.addEventListener("DOMContentLoaded", () => {
+				document.querySelectorAll('.proj-card > img').forEach(img => {
+					const card = img.closest('.proj-card');
+					const title = card.querySelector('h3').innerText;
+					
+					let matchedKey = Object.keys(projectMedia).find(k => title.includes(k));
+					let mediaData = matchedKey ? projectMedia[matchedKey] : null;
+
+					if (mediaData && mediaData.thumb) {
+						img.src = mediaData.thumb;
+						img.style.objectFit = 'cover';
+						img.style.height = '100%';
+					}
+
+					const wrap = document.createElement('div');
+					wrap.className = 'proj-img-wrap';
+					img.parentNode.insertBefore(wrap, img);
+					wrap.appendChild(img);
+					
+					const overlay = document.createElement('div');
+					overlay.className = 'proj-img-overlay';
+					overlay.innerHTML = '<span class="view-btn">View</span>';
+					wrap.appendChild(overlay);
+
+					wrap.addEventListener('click', () => {
+						const bodyHtml = card.querySelector('.proj-body').innerHTML;
+						let visualsHtml = '';
+						
+						if (mediaData && mediaData.media && mediaData.media.length > 0) {
+							mediaData.media.forEach((item) => {
+								if (item.type === 'img') {
+									visualsHtml += `<img src="${item.src}" />`;
+								} else if (item.type === 'video') {
+									visualsHtml += `<video controls><source src="${item.src}" type="video/mp4"></video>`;
+								}
+							});
+						} else {
+							const fallbackImg = img.getAttribute('src');
+							visualsHtml = `
+								<img src="${fallbackImg}" />
+								<div style="text-align: center; padding: 4em 2em; background: #111;">
+									<h3 style="color: #e63946; margin-bottom: 0.5em; font-size:1.5em;">&#128679; Coming Soon</h3>
+									<p style="color: #888; font-size: 1.1em; margin:0;">Real project pictures and videos are being updated.</p>
+								</div>
+							`;
+						}
+
+						document.getElementById('modal-content-area').innerHTML = `
+							<div class="modal-split">
+								<div class="modal-visuals">
+									${visualsHtml}
+								</div>
+								<div class="modal-details">
+									<div class="modal-actions">
+										<a href="#" class="button">View on GitHub</a>
+										<a href="#" class="button">Watch Video</a>
+									</div>
+									<div style="font-size: 1.1em; line-height: 1.8; color: #444;">
+										${bodyHtml}
+									</div>
+								</div>
+							</div>
+						`;
+						
+						document.getElementById('project-modal').classList.add('active');
+						document.body.classList.add('modal-open');
+					});
+				});
+
+				const closeModal = () => {
+					document.getElementById('project-modal').classList.remove('active');
+					document.body.classList.remove('modal-open');
+					// Stop videos
+					document.querySelectorAll('#project-modal video').forEach(v => v.pause());
+				};
+				document.querySelector('.modal-close').addEventListener('click', closeModal);
+				document.getElementById('project-modal').addEventListener('click', (e) => {
+					if(e.target.id === 'project-modal') closeModal();
+				});
+				document.addEventListener('keydown', (e) => {
+					if (e.key === "Escape") closeModal();
+				});
+			});
+		</script>
+
 		<script>
 			if (window.location.hash === '#portfolio') {
 				document.body.classList.remove('is-home');

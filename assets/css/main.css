@@ -2600,7 +2600,7 @@ input, select, textarea {
 		justify-content: space-between;
 		background-color: #1f1815;
 		background-attachment: scroll,							scroll,		scroll;
-		background-image: linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.52)), url("images/overlay.png"), url("../../images/home/background_1.jpg");
+		background-image: linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.52)), url("images/overlay.png"), url("../../pictures/home/background_1.jpg");
 		background-position: top left,							top left,	center center;
 		background-repeat: repeat,								repeat,		no-repeat;
 		background-size: auto,									auto,		cover;
@@ -3085,7 +3085,7 @@ input, select, textarea {
 			#footer {
 				background-attachment: scroll;
 				background-color: #1f1815;
-				background-image: url("images/overlay.png"), url("../../images/home/background_1.jpg");
+				background-image: url("images/overlay.png"), url("../../pictures/home/background_1.jpg");
 				background-position: top left,						bottom center;
 				background-repeat: repeat,							no-repeat;
 				background-size: auto,							cover;

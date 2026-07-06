@@ -14,7 +14,7 @@
 
 	/* Nền: overlay texture + ảnh nền chính */
 	background-color: #1f1815;
-	background-image: url("images/overlay.png"), url("../../images/home/background_1.jpg");
+	background-image: url("pictures/overlay.png"), url("../../pictures/home/background_1.jpg");
 	background-position: top left, center center;
 	background-repeat: repeat, no-repeat;
 	background-size: auto, cover;
@@ -65,7 +65,7 @@ body.is-home         { overflow: hidden; }
 .home-subtitle {
 	font-size: 1.4em; line-height: 1.5;
 	color: rgba(255, 255, 255, 0.92); /* Trắng đục, tương phản rõ hơn #a1a1a6 */
-	font-weight: 400; max-width: 600px;
+	font-weight: 400; max-width: 800px;
 	margin: 0 auto 2.5em auto; letter-spacing: -0.01em;
 	text-shadow: 0 1px 6px rgba(0,0,0,0.55);
 }
