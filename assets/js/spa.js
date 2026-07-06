@@ -21,7 +21,7 @@ $(document).ready(function() {
         
         var $main = $('#main');
         
-        $main.fadeOut(300, function() {
+        $main.children().fadeOut(200).promise().done(function() {
             fetch(targetComponent)
                 .then(response => {
                     if (!response.ok) throw new Error("HTTP error " + response.status);
@@ -30,7 +30,7 @@ $(document).ready(function() {
                 .then(html => {
                     $main.html(html);
                     
-                    document.body.className = document.body.className.replace(/view-\w+-active/g, '');
+                    document.body.className = document.body.className.replace(/\b\w+-active\b/g, '').trim();
                     document.body.classList.add(targetComponent.replace('components/', '').replace('.html', '') + '-active');
                     
                     if (targetComponent === 'components/home.html') {
@@ -39,7 +39,7 @@ $(document).ready(function() {
                         }
                     }
 
-                    $main.fadeIn(300, function() {
+                    $main.children().hide().fadeIn(300, function() {
                         if (href === 'index.html#portfolio') {
                             window.scrollTo({ top: $('#portfolio').length ? $('#portfolio').offset().top : 500, behavior: 'smooth' });
                         } else {
@@ -50,7 +50,7 @@ $(document).ready(function() {
                 .catch(err => {
                     console.error("Error loading component:", err);
                     $main.html('<p>Error loading content. Please ensure you are running on a local server (e.g., Live Server) to avoid CORS issues.</p>');
-                    $main.fadeIn(300);
+                    $main.children().hide().fadeIn(300);
                 });
         });
     });

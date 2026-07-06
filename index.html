@@ -3,7 +3,7 @@
 	<head>
 		<title>Nguyen Viet Hoang Luong: Portfolio</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/home-overlay.css" />
 		<link href="https://placehold.co/32x32/png?text=L" rel="icon">
@@ -81,7 +81,9 @@
 			const projectMedia = {
 				"PickPilot": {
 					thumb: "pictures/PickPilot/1_arm.JPEG",
-					media: [{type: 'img', src: 'pictures/PickPilot/1_arm.JPEG'}]
+					media: [{type: 'img', src: 'pictures/PickPilot/1_arm.JPEG'}],
+					github: "https://c2-app-054.homielab.com/",
+					youtube: "https://www.youtube.com/watch?v=GM59NCCEHl4"
 				},
 				"Ball & Beam": {
 					thumb: "pictures/BallAndBeam/Beam-real.png",
@@ -196,18 +198,27 @@
 							`;
 						}
 
+						let actionsHtml = '';
+						if (mediaData && (mediaData.github || mediaData.youtube)) {
+							let buttons = '';
+							if (mediaData.github) buttons += `<a href="${mediaData.github}" class="button" target="_blank"><i class="fab fa-github"></i> GitHub</a> `;
+							if (mediaData.youtube) buttons += `<a href="${mediaData.youtube}" class="button primary" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>`;
+							actionsHtml = `<div class="modal-actions">${buttons}</div>`;
+						}
+
 						document.getElementById('modal-content-area').innerHTML = `
-							<div class="modal-split">
-								<div class="modal-visuals" id="modal-carousel-container">
-									<div class="carousel-track" id="modal-carousel-track">
-										${slidesHtml}
+  							<div class="modal-split">
+  								<div class="modal-visuals" id="modal-carousel-container">
+									<div class="top-bar-overlay" id="modal-top-bar"></div>
+									<div class="modal-visuals-absolute" id="modal-visuals-absolute">
+										<div class="carousel-track" id="modal-carousel-track">
+											${slidesHtml}
+										</div>
+										${controlsHtml}
 									</div>
-									${controlsHtml}
-								</div>
-								<div class="modal-details">
-									<div class="modal-actions">
-										<a href="#" class="button"><i class="fab fa-github"></i> GitHub</a> <a href="#" class="button primary"><i class="fab fa-youtube"></i> YouTube</a>
-									</div>
+  								</div>
+  								<div class="modal-details">
+  									${actionsHtml}
 									<div style="font-size: 1.1em; line-height: 1.8; color: #444;">
 										${bodyHtml}
 									</div>
@@ -223,25 +234,84 @@
 						// Reset track position after DOM is updated
 						requestAnimationFrame(() => {
 							const track = document.getElementById('modal-carousel-track');
-							if (track) track.style.transform = 'translateX(0%)';
-						});
+							if (track) {
+								track.scrollTo({ left: 0 });
+								
+								// Native Swipe Sync
+								track.addEventListener('scroll', () => {
+									let newIndex = Math.round(track.scrollLeft / track.clientWidth);
+									if (newIndex !== window.currentSlideIndex && newIndex >= 0 && newIndex < window.totalSlides) {
+										window.currentSlideIndex = newIndex;
+										window.updateCarousel(false);
+									}
+								}, {passive: true});
+							}
 
-						// Add Touch Swipe Support for mobile
-						const carouselContainer = document.getElementById('modal-carousel-container');
-						if (carouselContainer) {
-							let touchStartX = 0;
-							let touchEndX = 0;
-							carouselContainer.addEventListener('touchstart', e => {
-								touchStartX = e.changedTouches[0].screenX;
-							}, {passive: true});
-							carouselContainer.addEventListener('touchend', e => {
-								touchEndX = e.changedTouches[0].screenX;
-								if (window.totalSlides > 1) {
-									if (touchEndX < touchStartX - 50) window.changeSlide(1);
-									if (touchEndX > touchStartX + 50) window.changeSlide(-1);
-								}
-							}, {passive: true});
-						}
+							// Scroll-linked shrink header (Parallax scale)
+							const split = document.querySelector('.modal-split');
+							const absoluteVisuals = document.getElementById('modal-visuals-absolute');
+							const topBar = document.getElementById('modal-top-bar');
+							
+							if (split && absoluteVisuals) {
+								absoluteVisuals.style.transformOrigin = 'center center';
+								absoluteVisuals.style.webkitTransformOrigin = 'center center';
+								
+								split.addEventListener('scroll', () => {
+									if (window.innerWidth > 980) return; // Only apply on mobile
+									let scrollY = split.scrollTop;
+									if (scrollY < 0) scrollY = 0;
+									
+									// Use actual CSS layout height instead of innerHeight to prevent mobile vh bugs
+									let h = absoluteVisuals.offsetHeight;
+									let maxScroll = h - 50; // Text stops at 50px from top
+									
+									// Scale down but lock at exactly 0.4 when text reaches top bar
+									let progress = Math.min(1, scrollY / maxScroll);
+									let scale = Math.max(0.4, 1 - progress * 0.6);
+									
+									// Bypass transform-origin browser bugs by using explicit translateY math
+									let heightDiff = h - (h * scale);
+									let shiftY = heightDiff / 2;
+									
+									// Apply GPU-accelerated translate and scale
+									absoluteVisuals.style.transform = `translateY(-${shiftY}px) scale(${scale})`;
+									
+									// Fade in top bar overlay
+									if (topBar) {
+										topBar.style.background = `rgba(30, 30, 30, ${progress * 0.85})`;
+										topBar.style.backdropFilter = `blur(${progress * 8}px)`;
+										topBar.style.webkitBackdropFilter = `blur(${progress * 8}px)`;
+									}
+								}, {passive: true});
+							}
+							
+							// Edge swipe infinite loop detection
+							if (trackContainer) {
+								let touchStartX = 0;
+								let touchStartY = 0;
+								trackContainer.addEventListener('touchstart', e => {
+									touchStartX = e.changedTouches[0].screenX;
+									touchStartY = e.changedTouches[0].screenY;
+								}, {passive: true});
+								trackContainer.addEventListener('touchend', e => {
+									let touchEndX = e.changedTouches[0].screenX;
+									let touchEndY = e.changedTouches[0].screenY;
+									let diffX = touchEndX - touchStartX;
+									let diffY = touchEndY - touchStartY;
+									
+									// If the swipe is more vertical than horizontal, do not trigger horizontal slide
+									if (Math.abs(diffY) > Math.abs(diffX)) return;
+									
+									if (window.totalSlides > 1) {
+										if (window.currentSlideIndex === window.totalSlides - 1 && diffX < -50) {
+											window.changeSlide(1);
+										} else if (window.currentSlideIndex === 0 && diffX > 50) {
+											window.changeSlide(-1);
+										}
+									}
+								}, {passive: true});
+							}
+						});
 					});
 				});
 
@@ -278,10 +348,12 @@
 			window.currentSlideIndex = 0;
 			window.totalSlides = 0;
 
-			window.updateCarousel = function() {
+			window.updateCarousel = function(snap = true) {
 				const track = document.getElementById('modal-carousel-track');
 				if (!track) return;
-				track.style.transform = 'translateX(-' + (window.currentSlideIndex * 100) + '%)';
+				if (snap) {
+					track.scrollTo({ left: window.currentSlideIndex * track.clientWidth, behavior: 'smooth' });
+				}
 				document.querySelectorAll('.carousel-dot').forEach(function(dot, i) {
 					dot.classList.toggle('active', i === window.currentSlideIndex);
 				});
@@ -292,12 +364,12 @@
 				window.currentSlideIndex += dir;
 				if (window.currentSlideIndex < 0) window.currentSlideIndex = window.totalSlides - 1;
 				if (window.currentSlideIndex >= window.totalSlides) window.currentSlideIndex = 0;
-				window.updateCarousel();
+				window.updateCarousel(true);
 			};
 
 			window.goToSlide = function(index) {
 				window.currentSlideIndex = index;
-				window.updateCarousel();
+				window.updateCarousel(true);
 			};
 		</script>
 
@@ -316,3 +388,4 @@
 	<script src="assets/js/spa.js"></script>
 </body>
 </html>
+

@@ -4,7 +4,49 @@
 					<a href="assets/docs/NguyenVietHoangLuong_Embedded_Robotics.pdf" download class="button primary icon solid fa-book btn-square-icon" style="padding: 0 !important; width: 2.4em !important; min-width: 2.4em !important;" title="Download Resume"></a>
 				</div>
 
-				<div style="max-width: 980px; margin: 0 auto; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
-					<iframe src="assets/docs/NguyenVietHoangLuong_Embedded_Robotics.pdf#view=FitH" width="100%" height="1150px" style="border: none; display: block;"></iframe>
+				<div style="max-width: 980px; margin: 0 auto; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); background: #fff;" id="pdf-container">
+					<!-- PDF content injected by JS -->
 				</div>
+
+				<script>
+					(function() {
+						var isMobile = window.innerWidth <= 980;
+						var container = document.getElementById('pdf-container');
+						var pdfUrl = 'assets/docs/NguyenVietHoangLuong_Embedded_Robotics.pdf';
+
+						if (isMobile) {
+							// For mobile (especially iOS Safari), iframes are notoriously buggy for PDFs.
+							// We use PDF.js to render it perfectly onto a scalable canvas!
+							container.innerHTML = '<canvas id="pdf-canvas" style="width: 100%; display: block;"></canvas><div style="text-align: center; padding: 2em; color: #666;" id="pdf-loading"><i class="fas fa-spinner fa-spin"></i> Loading Resume...</div>';
+							
+							var script = document.createElement('script');
+							script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js';
+							script.onload = function() {
+								var pdfjsLib = window['pdfjs-dist/build/pdf'];
+								pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+								
+								pdfjsLib.getDocument(pdfUrl).promise.then(function(pdf) {
+									pdf.getPage(1).then(function(page) {
+										var scale = 2.0; // Retina quality
+										var viewport = page.getViewport({scale: scale});
+										var canvas = document.getElementById('pdf-canvas');
+										var context = canvas.getContext('2d');
+										canvas.height = viewport.height;
+										canvas.width = viewport.width;
+										
+										page.render({ canvasContext: context, viewport: viewport }).promise.then(function() {
+											document.getElementById('pdf-loading').style.display = 'none';
+										});
+									});
+								}).catch(function(err) {
+									container.innerHTML = '<p style="padding: 2em; text-align: center;">Error loading PDF. <a href="'+pdfUrl+'">Click here to download it</a>.</p>';
+								});
+							};
+							document.body.appendChild(script);
+						} else {
+							// Desktop works perfectly with standard iframe
+							container.innerHTML = '<iframe src="' + pdfUrl + '#view=FitH" width="100%" height="1150px" style="border: none; display: block;"></iframe>';
+						}
+					})();
+				</script>
 			</section>

@@ -3,33 +3,46 @@
 					<a href="index.html" class="button icon solid fa-arrow-left" style="box-shadow: none;">Back</a>
 				</div>
 
-				<div>
-					<h1 class="contact-header">Let's connect.</h1>
-					<p class="contact-subtitle">Available for engineering collaboration and technical discussions.</p>
+				<div class="contact-layout">
+					<div class="contact-left">
+						<h1 class="contact-header">Let's connect.</h1>
+						<p class="contact-subtitle">Open to embedded engineering roles,<br>collaborations, and robotics projects.</p>
 
-					<div class="buttons-container">
-						<a href="https://mail.google.com/mail/?view=cm&fs=1&to=nguyenviethoangluong@gmail.com" target="_blank" class="contact-btn primary">Email me</a>
-						<a href="https://www.linkedin.com/in/luong-nguyen-bbba84284/" target="_blank" class="contact-btn">LinkedIn</a>
-						<a href="https://github.com/RobotWar05" target="_blank" class="contact-btn">GitHub</a>
-					</div>
+						<!-- Mobile Icons -->
+						<ul class="icons contact-social-icons mobile-only">
+							<li><a href="https://github.com/RobotWar05" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
+							<li><a href="https://www.linkedin.com/in/luong-nguyen-bbba84284/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+							<li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=nguyenviethoangluong@gmail.com" class="icon solid fa-envelope" target="_blank"><span class="label">Email</span></a></li>
+						</ul>
 
-					<div class="contact-meta">
-						<div class="meta-item">
-							<h4>Location</h4>
-							<p>Hanoi, Vietnam</p>
+						<!-- Desktop Buttons -->
+						<div class="buttons-container desktop-only" style="margin-bottom: 3.5em;">
+							<a href="https://mail.google.com/mail/?view=cm&fs=1&to=nguyenviethoangluong@gmail.com" target="_blank" class="contact-btn primary">Email</a>
+							<a href="https://www.linkedin.com/in/luong-nguyen-bbba84284/" target="_blank" class="contact-btn">LinkedIn</a>
+							<a href="https://github.com/RobotWar05" target="_blank" class="contact-btn">GitHub</a>
 						</div>
-						<div class="meta-item">
-							<h4>Languages</h4>
-							<p>English, Vietnamese</p>
-						</div>
-						<div class="meta-item">
-							<h4>Response Time</h4>
-							<p>Within 24-48 hours</p>
-						</div>
-						<div class="meta-item">
-							<h4>Direct Line</h4>
-							<p><a href="#" class="phone-link" onclick="navigator.clipboard.writeText('+84 392176769'); alert('Phone number copied!'); return false;" title="Click to copy">+84 392176769</a></p>
+
+						<div class="contact-info-card">
+							<div class="meta-item">
+								<h4>Location</h4>
+								<p>Hanoi, Vietnam</p>
+							</div>
+							<div class="meta-item">
+								<h4>Languages</h4>
+								<p>English, Vietnamese</p>
+							</div>
+							<div class="meta-item">
+								<h4>Response Time</h4>
+								<p>Within 24 hours</p>
+							</div>
+							<div class="meta-item">
+								<h4>Direct Line</h4>
+								<p><a href="#" class="phone-link" onclick="navigator.clipboard.writeText('+84 392176769'); alert('Phone number copied!'); return false;" title="Click to copy">+84 392176769</a></p>
+							</div>
 						</div>
 					</div>
+					
+					<!-- Empty right column to balance flex layout against the split background -->
+					<div class="contact-right desktop-only"></div>
 				</div>
 			</section>
