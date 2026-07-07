@@ -71,7 +71,24 @@
 			}
 
 			/* comment */
-			#one .actions { margin-top: 2.5em; }
+			#one .actions { 
+				margin-top: 2.5em; 
+				display: flex;
+				justify-content: center;
+				gap: 15px;
+			}
+			#one .actions li {
+				padding: 0 !important;
+			}
+			
+			@keyframes gentle-shake {
+				0% { transform: translate(0, 0) rotate(0deg); }
+				25% { transform: translate(-2px, -1px) rotate(-1deg); }
+				50% { transform: translate(0, 2px) rotate(0deg); }
+				75% { transform: translate(2px, -1px) rotate(1deg); }
+				100% { transform: translate(0, 0) rotate(0deg); }
+			}
+
 			#main .button {
 				display: inline-flex !important;
 				align-items: center !important;
@@ -99,6 +116,22 @@
 				background: #e63946 !important;
 				border-color: #e63946 !important;
 				color: #fff !important;
+			}
+
+			/* Specifically the 3 buttons in the Home section */
+			#one .actions .button, #one .actions .button.primary {
+				background: rgba(255, 255, 255, 0.6) !important;
+				backdrop-filter: blur(10px);
+				-webkit-backdrop-filter: blur(10px);
+				border: 2px solid #111 !important;
+				color: #111 !important;
+				border-radius: 8px !important;
+				box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+			}
+			#one .actions .button:hover, #one .actions .button.primary:hover {
+				background: rgba(255, 255, 255, 0.95) !important;
+				animation: gentle-shake 0.4s ease-in-out infinite;
+				box-shadow: 0 6px 15px rgba(0,0,0,0.1) !important;
 			}
 			
 			/* Desktop/Mobile Toggles */
