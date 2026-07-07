@@ -9,9 +9,20 @@
 		<link href="pictures/logo.png" rel="icon" type="image/png">
 		<link rel="stylesheet" href="assets/css/portfolio.css" />
 	</head>
-	<body class="is-preload is-home">
+	<body class="is-preload">
 
 		<!-- Intro Preloader (Scattered effect) -->
+		<script>
+			// Skip intro preloader and overlay if reloading a subpage (F5 on /Resume.html, etc.)
+			var path = window.location.pathname.split('/').pop().toLowerCase();
+			if ((window.location.hash && window.location.hash !== '' && window.location.hash !== '#home') || 
+			    (path !== '' && path !== 'index.html' && path !== '/')) {
+				document.body.classList.remove('is-home');
+				var style = document.createElement('style');
+				style.innerHTML = '#intro-preloader, #home-landing { display: none !important; }';
+				document.head.appendChild(style);
+			}
+		</script>
 		<div id="intro-preloader">
 			<div class="scatter-wrapper">
 				<span style="--i:1; --tx:-150px; --ty:-100px; --r:-45deg;">R</span>

@@ -96,3 +96,18 @@ Kết quả:
 - Dựa trên theme Strata của HTML5 UP.
 - Có sidebar cố định, main content bên phải, ảnh nền mạch điện.
 - Được tùy biến thành portfolio Embedded Systems / Automation / Robotics.
+
+## 2026-07-07 (Update 2) - Bugfixes & Theming
+
+- **Sửa lỗi nút Home**: Không bị kẹt ở trang đen overlay (bỏ gán class is-home khi bấm).
+- **Sửa lỗi Intro (F5)**: Bỏ class is-home khỏi các subpage (Resume, Contact) để F5 không bị chạy lại intro.
+- **Sửa lỗi Ám màu khi đổi theme**: Tắt 	ransition trên ody và #main để tránh hiệu ứng chuyển màu chậm không đồng đều.
+- **Sửa lỗi giao diện Theme Light (Nền Trắng)**: Các thẻ h2, link contact, thẻ project tự động đổi sang màu tối (#111, #333) thay vì bị hòa lẫn vào nền trắng.
+- **Cập nhật Theme Dark**: Nền thành #000000 (đen tuyền) thay vì xám đậm.
+- **Xóa viền ngang thừa**: Bỏ order-top ở section Projects cho mọi kích thước màn hình (lúc trước bị giới hạn ở desktop).
+
+## 2026-07-07 (Update 3) - Fix Home Button & Intro
+
+- **Nút Home**: Thêm class 
+o-spa để ép trình duyệt load lại hoàn toàn index.html khi bấm nút Home, giúp trang hiển thị lại màn hình Intro (ROBOTWAR05) như người dùng yêu cầu thay vì chỉ cuộn lên đầu trang.
+- **Intro (F5)**: Xóa logic lưu sessionStorage trong index.html để màn hình Intro luôn xuất hiện khi F5 tại trang chủ. (Kết hợp với update trước: F5 ở Resume/Contact sẽ không có Intro).

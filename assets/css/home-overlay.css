@@ -72,26 +72,27 @@ body.is-home         { overflow: hidden; }
 
 /* --- Nút CTA: Liquid Glass Pill --- */
 .big-project-btn {
-	background: rgba(255,255,255,0.08);
+	background: rgba(255,255,255,0.95);
 	backdrop-filter: saturate(180%) blur(20px);
 	-webkit-backdrop-filter: saturate(180%) blur(20px);
-	border: 1px solid rgba(255,255,255,0.15) !important;
-	color: #fff !important; font-size: 1.1em;
-	padding: 1.2em 3em !important; border-radius: 50px;
+	border: 1px solid rgba(255,255,255,1) !important;
+	color: #111 !important; 
+	width: 84px; height: 84px;
+	border-radius: 50%;
+	padding: 0 !important;
 	cursor: pointer;
 	transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-	font-weight: 500; letter-spacing: 1px;
-	display: inline-flex; align-items: center; gap: 12px;
-	box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+	display: inline-flex; align-items: center; justify-content: center;
+	box-shadow: 0 0 30px rgba(0,0,0,0.8), 0 4px 15px rgba(0,0,0,0.5) !important;
+	margin-top: 1.5em;
 }
-.big-project-btn i { font-size: 1.1em; transition: transform 0.4s ease; }
+.big-project-btn i { font-size: 1.6em; transition: transform 0.4s ease; margin-left: 5px; color: #111 !important; }
 .big-project-btn:hover {
-	background: rgba(255,255,255,0.15) !important;
-	border-color: rgba(255,255,255,0.3) !important;
-	transform: scale(1.02);
-	box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+	background: #ffffff !important;
+	border-color: #ffffff !important;
+	transform: scale(1.08);
+	box-shadow: 0 0 40px rgba(0,0,0,0.9), 0 10px 30px rgba(0,0,0,0.6) !important;
 }
-.big-project-btn:hover i { transform: translateX(4px); }
 
 /* --- Mobile Responsiveness --- */
 @media (max-width: 768px) {
@@ -105,7 +106,8 @@ body.is-home         { overflow: hidden; }
 		margin-bottom: 2em; 
 		white-space: nowrap;
 	}
-	.big-project-btn { font-size: 1em; padding: 1em 2em !important; }
+	.big-project-btn { width: 60px; height: 60px; margin-top: 1em; }
+	.big-project-btn i { font-size: 1.2em; }
 }
 
 @media (max-width: 480px) {
