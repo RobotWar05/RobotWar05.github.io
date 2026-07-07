@@ -11,10 +11,28 @@
 	</head>
 	<body class="is-preload is-home">
 
-		<!-- Intro Preloader (ROBOTWAR05 effect) -->
+		<!-- Intro Preloader (Scattered effect) -->
+		<script>
+			// Skip intro preloader and overlay if reloading a subpage (F5 on #resume, etc.)
+			if (window.location.hash && window.location.hash !== '') {
+				document.body.classList.remove('is-home');
+				var style = document.createElement('style');
+				style.innerHTML = '#intro-preloader { display: none !important; }';
+				document.head.appendChild(style);
+			}
+		</script>
 		<div id="intro-preloader">
-			<div class="glitch-wrapper">
-				<div class="glitch-text" data-text="ROBOTWAR05">ROBOTWAR05</div>
+			<div class="scatter-wrapper">
+				<span style="--i:1; --tx:-150px; --ty:-100px; --r:-45deg;">R</span>
+				<span style="--i:2; --tx:100px; --ty:-150px; --r:30deg;">O</span>
+				<span style="--i:3; --tx:-50px; --ty:150px; --r:-20deg;">B</span>
+				<span style="--i:4; --tx:150px; --ty:50px; --r:45deg;">O</span>
+				<span style="--i:5; --tx:-100px; --ty:-50px; --r:-15deg;">T</span>
+				<span style="--i:6; --tx:50px; --ty:100px; --r:25deg;">W</span>
+				<span style="--i:7; --tx:-120px; --ty:120px; --r:-60deg;">A</span>
+				<span style="--i:8; --tx:120px; --ty:-120px; --r:60deg;">R</span>
+				<span style="--i:9; --tx:-80px; --ty:-130px; --r:-35deg;">0</span>
+				<span style="--i:10; --tx:80px; --ty:130px; --r:35deg;">5</span>
 			</div>
 		</div>
 
