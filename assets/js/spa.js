@@ -4,7 +4,11 @@ $(document).ready(function() {
         var href = $(this).attr('href');
         
         if (!href || href.startsWith('http') || href.startsWith('mailto:') || $(this).attr('target') === '_blank') return;
-        if (href === '#' || href === '') return;
+        if (href === '#' || href === '') {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
         
         var targetComponent = '';
         if (href === 'index.html' || href === 'index.html#portfolio') {

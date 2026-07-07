@@ -1,7 +1,7 @@
 <section id="one" class="spa-view view-contact">
-				<div style="margin-bottom: 2.5em;">
-					<a href="index.html" class="button icon solid fa-arrow-left" style="box-shadow: none;">Back</a>
-				</div>
+				<ul class="actions" style="margin-top: 0; margin-bottom: 20px; justify-content: flex-start !important;">
+					<li><a href="index.html" class="button" title="Back"><i class="fas fa-arrow-left mobile-icon"></i></a></li>
+				</ul>
 
 				<div class="contact-layout">
 					<div class="contact-left">
@@ -12,12 +12,12 @@
 						<ul class="icons contact-social-icons mobile-only">
 							<li><a href="https://github.com/RobotWar05" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
 							<li><a href="https://www.linkedin.com/in/luong-nguyen-bbba84284/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-							<li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=nguyenviethoangluong@gmail.com" class="icon solid fa-envelope" target="_blank"><span class="label">Email</span></a></li>
+							<li><a href="#" onclick="event.preventDefault(); navigator.clipboard.writeText('nguyenviethoangluong@gmail.com').then(function(){ alert('Đã copy email: nguyenviethoangluong@gmail.com'); });" class="icon solid fa-envelope" title="Copy Email"><span class="label">Email</span></a></li>
 						</ul>
 
 						<!-- Desktop Buttons -->
 						<div class="buttons-container desktop-only" style="margin-bottom: 3.5em;">
-							<a href="https://mail.google.com/mail/?view=cm&fs=1&to=nguyenviethoangluong@gmail.com" target="_blank" class="contact-btn primary">Email</a>
+							<a href="#" onclick="event.preventDefault(); navigator.clipboard.writeText('nguyenviethoangluong@gmail.com').then(function(){ alert('Đã copy email: nguyenviethoangluong@gmail.com'); });" class="contact-btn">Email</a>
 							<a href="https://www.linkedin.com/in/luong-nguyen-bbba84284/" target="_blank" class="contact-btn">LinkedIn</a>
 							<a href="https://github.com/RobotWar05" target="_blank" class="contact-btn">GitHub</a>
 						</div>

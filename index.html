@@ -79,7 +79,7 @@
 				<ul class="icons">
 					<li><a href="https://github.com/RobotWar05" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li>
 					<li><a href="https://www.linkedin.com/in/luong-nguyen-bbba84284/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-					<li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=nguyenviethoangluong@gmail.com" class="icon solid fa-envelope" target="_blank"><span class="label">Email</span></a></li>
+					<li><a href="#" onclick="event.preventDefault(); navigator.clipboard.writeText('nguyenviethoangluong@gmail.com').then(function(){ alert('Đã copy email: nguyenviethoangluong@gmail.com'); });" class="icon solid fa-envelope" title="Copy Email"><span class="label">Email</span></a></li>
 				</ul>
 			</div>
 		</footer>
@@ -462,6 +462,38 @@
 			});
 		</script>
 
+	<script>
+		// Theme Toggle Logic
+		(function() {
+			const themes = ['theme-light', 'theme-dark', 'theme-grey'];
+			let currentThemeIndex = 0;
+			
+			// Load saved theme
+			const savedTheme = localStorage.getItem('site-theme');
+			if (savedTheme && themes.includes(savedTheme)) {
+				currentThemeIndex = themes.indexOf(savedTheme);
+				document.body.classList.add(themes[currentThemeIndex]);
+			} else {
+				// Default is theme-light if not saved or invalid
+				if (savedTheme === 'theme-warm') {
+					currentThemeIndex = 2;
+					document.body.classList.add('theme-grey');
+					localStorage.setItem('site-theme', 'theme-grey');
+				}
+			}
+
+			document.body.addEventListener('click', function(e) {
+				const toggleBtn = e.target.closest('#theme-toggle');
+				if (toggleBtn) {
+					e.preventDefault();
+					document.body.classList.remove(themes[currentThemeIndex]);
+					currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+					document.body.classList.add(themes[currentThemeIndex]);
+					localStorage.setItem('site-theme', themes[currentThemeIndex]);
+				}
+			});
+		})();
+	</script>
 	<script src="assets/js/spa.js"></script>
 </body>
 </html>
