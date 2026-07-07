@@ -11,6 +11,13 @@
 	</head>
 	<body class="is-preload is-home">
 
+		<!-- Intro Preloader (ROBOTWAR05 effect) -->
+		<div id="intro-preloader">
+			<div class="glitch-wrapper">
+				<div class="glitch-text" data-text="ROBOTWAR05">ROBOTWAR05</div>
+			</div>
+		</div>
+
 		<!-- Apple Style Home Overlay -->
 		<div id="home-landing">
 			<div class="home-avatar-wrapper">
@@ -31,13 +38,13 @@
   			<div class="inner">
 				<div class="header-profile">
 					<a href="index.html" class="image avatar"><img src="pictures/me.JPEG" alt=""/></a>
-					<h1>
-						<strong>Nguyen Viet Hoang Luong</strong><br/><br/>
-						Embedded Systems<br/><br/>
-						<b>B.E. in Control Engineering &amp; Automation</b><br/>
-						<i>Hanoi University of Mining and Geology</i><br/><br/>
-						<b>AI in Action Engineering</b><br/>
-						<i>VinUniversity</i>
+					<h1 class="profile-summary">
+						<strong>Nguyen Viet Hoang Luong</strong>
+						<span class="profile-role">Embedded Systems</span>
+						<span class="profile-degree">B.E. in Control Engineering &amp; Automation</span>
+						<span class="profile-school">Hanoi University of Mining and Geology</span>
+						<span class="profile-degree">AI in Action Engineering</span>
+						<span class="profile-school">VinUniversity</span>
 					</h1>
 				</div>
   			</div>
@@ -143,31 +150,74 @@
 
 			// Auto-wrap project images for Hover overlay and attach Modal click events
 			window.initHomeScripts = function() {
-				document.querySelectorAll('.proj-card > img').forEach(img => {
-					const card = img.closest('.proj-card');
-					const title = card.querySelector('h3').innerText;
+				document.querySelectorAll('.proj-card').forEach(card => {
+					if (card.dataset.popupBound === 'true') return;
+
+					const titleEl = card.querySelector('h3');
+					const mediaRoot = card.querySelector('.proj-img-carousel') || card.querySelector(':scope > img');
+					if (!titleEl || !mediaRoot) return;
+
+					const title = titleEl.innerText;
+					let previewImg = mediaRoot.matches('img') ? mediaRoot : mediaRoot.querySelector('img');
 					
 					let matchedKey = Object.keys(projectMedia).find(k => title.includes(k));
 					let mediaData = matchedKey ? projectMedia[matchedKey] : null;
 
-					if (mediaData && mediaData.thumb) {
-						img.src = mediaData.thumb;
-						img.style.objectFit = 'cover';
-						img.style.height = '100%';
+					if (previewImg && mediaData && mediaData.thumb) {
+						previewImg.src = mediaData.thumb;
+						previewImg.style.objectFit = 'cover';
 					}
 
-					const wrap = document.createElement('div');
-					wrap.className = 'proj-img-wrap';
-					img.parentNode.insertBefore(wrap, img);
-					wrap.appendChild(img);
+					let clickTarget = mediaRoot;
+					if (mediaRoot.matches('img')) {
+						const wrap = document.createElement('div');
+						wrap.className = 'proj-img-wrap';
+						mediaRoot.parentNode.insertBefore(wrap, mediaRoot);
+						wrap.appendChild(mediaRoot);
+						clickTarget = wrap;
+					} else {
+						mediaRoot.classList.add('proj-img-wrap');
+					}
 					
-					const overlay = document.createElement('div');
-					overlay.className = 'proj-img-overlay';
-					overlay.innerHTML = '<span class="view-btn">View</span>';
-					wrap.appendChild(overlay);
+					if (!clickTarget.querySelector(':scope > .proj-img-overlay')) {
+						const overlay = document.createElement('div');
+						overlay.className = 'proj-img-overlay';
+						overlay.innerHTML = '<span class="view-btn">View</span>';
+						clickTarget.appendChild(overlay);
+					}
 
-					wrap.addEventListener('click', () => {
-						const bodyHtml = card.querySelector('.proj-body').innerHTML;
+					clickTarget.addEventListener('click', () => {
+						const detailsNode = card.querySelector('.proj-body').cloneNode(true);
+						const modalTitleNode = detailsNode.querySelector('h3');
+						let modalTitle = titleEl.childNodes[0] ? titleEl.childNodes[0].textContent.trim() : titleEl.innerText.trim();
+						let modalScope = '';
+						let modalDate = '';
+
+						if (modalTitleNode) {
+							const yearNode = modalTitleNode.querySelector('.yr');
+							const scopeNode = modalTitleNode.querySelector('.desktop-text');
+							if (yearNode) {
+								modalDate = yearNode.textContent.trim();
+								yearNode.remove();
+							}
+							if (scopeNode) {
+								modalScope = scopeNode.textContent.replace(/^[\s\-+&]+/, '').trim();
+								scopeNode.remove();
+							}
+							modalTitle = modalTitleNode.textContent.trim();
+							modalTitleNode.remove();
+						}
+
+						const modalHeaderHtml = `
+							<header class="modal-project-header">
+								<h3 class="modal-project-title">
+									<span class="modal-title-main">${modalTitle}</span>
+									${modalScope ? `<span class="modal-title-scope">${modalScope}</span>` : ''}
+								</h3>
+								${modalDate ? `<div class="modal-project-date">${modalDate}</div>` : ''}
+							</header>
+						`;
+						const bodyHtml = detailsNode.innerHTML;
 						let slidesHtml = '';
 						let dotsHtml = '';
 						
@@ -175,7 +225,12 @@
 						if (mediaData && mediaData.media && mediaData.media.length > 0) {
 							items = mediaData.media;
 						} else {
-							items = [{type: 'img', src: img.getAttribute('src')}];
+							items = Array.from(card.querySelectorAll('.proj-img-carousel img, :scope > img'))
+								.map(source => ({type: 'img', src: source.getAttribute('src')}))
+								.filter(item => item.src);
+							if (items.length === 0 && previewImg) {
+								items = [{type: 'img', src: previewImg.getAttribute('src')}];
+							}
 						}
 
 						items.forEach((item, index) => {
@@ -219,6 +274,7 @@
   								</div>
   								<div class="modal-details">
   									${actionsHtml}
+									${modalHeaderHtml}
 									<div style="font-size: 1.1em; line-height: 1.8; color: #444;">
 										${bodyHtml}
 									</div>
@@ -234,6 +290,7 @@
 						// Reset track position after DOM is updated
 						requestAnimationFrame(() => {
 							const track = document.getElementById('modal-carousel-track');
+							const trackContainer = document.getElementById('modal-carousel-container');
 							if (track) {
 								track.scrollTo({ left: 0 });
 								
@@ -313,6 +370,8 @@
 							}
 						});
 					});
+
+					card.dataset.popupBound = 'true';
 				});
 
 				const closeModal = () => {
