@@ -1,36 +1,98 @@
-﻿---
-title: Lá»‹ch Sá»­ PhiÃªn Báº£n
-tags: [changelog]
+---
+title: Lịch Sử Phiên Bản
+tags: [changelog, stable]
 ---
 
-# ðŸ“œ Lá»‹ch Sá»­ PhiÃªn Báº£n
+# Lịch Sử Phiên Bản
 
-## v3.0 — Native Single Page Application (SPA) & Cleanup
-- **Native SPA Architecture:** Gộp hoàn toàn Resume.html và Contact.html vào chung index.html (chỉ dùng thẻ <section> ẩn/hiện bằng Javascript spa.js), triệt tiêu 100% hiện tượng chớp trắng màn hình khi chuyển trang mà không cần dùng đến React hay PJAX.
-- **Bảo toàn CSS Gốc:** Loại bỏ các thẻ <div> bọc ngoài, giữ nguyên cấu trúc #main > section để tái sử dụng toàn bộ mã CSS mạnh mẽ của Strata (khoảng cách, đường viền).
-- **Design System Fixes:** Đồng bộ nút bấm Đen/Trắng (High Contrast) trên toàn bộ trang. Chỉnh kích thước icon thành hình vuông tinh tế, sửa các lỗi mã hóa Font (encoding).
-- **Dọn dẹp hệ thống:** Loại bỏ hoàn toàn các thư mục/file rác không còn tác dụng sau khi đã quy về 1 trang duy nhất.
+## 2026-07-07 - Chốt bản ổn định GitHub IO
 
-## v2.0 â€” TÃ¡i cáº¥u trÃºc Component + Knowledge Base
-- **Jekyll Component:** TÃ¡ch Sidebar, Footer, Head, Scripts, Home Overlay thÃ nh 5 file riÃªng trong `_includes/`. 3 trang HTML chá»‰ cÃ²n chá»©a ná»™i dung thuáº§n tÃºy.
-- **Obsidian Vault:** Táº¡o há»‡ thá»‘ng tÃ i liá»‡u `my_web/` vá»›i 4 nhÃ³m: Architecture, Design System, Developer Guide, Changelog.
-- **README.md:** Táº¡o file hÆ°á»›ng dáº«n táº¡i thÆ° má»¥c gá»‘c cho ngÆ°á»i Ä‘áº¿n sau.
+Trạng thái:
 
-## v1.2 â€” Sá»­a lá»—i giao diá»‡n (Edge Cases)
+- Bản chính: `RobotWar05.github.io`.
+- Bản phụ: `RobotWar05-Premium-App`, dùng làm tham chiếu/archive.
+- Không xóa bản phụ để tránh mất dữ liệu ngoài ý muốn.
 
-| Lá»—i | NguyÃªn nhÃ¢n | CÃ¡ch sá»­a |
-|---|---|---|
-| áº¢nh bá»‹ báº§u dá»¥c | áº¢nh JPEG hÃ¬nh chá»¯ nháº­t + `border-radius: 100%` khÃ´ng Ä‘á»§ | ThÃªm `aspect-ratio: 1/1` + `overflow: hidden` |
-| Sidebar dá»‹ch pháº£i khi sang Contact | Trang Ã­t ná»™i dung â†’ scrollbar biáº¿n máº¥t â†’ viewport rá»™ng thÃªm 15px | `html { overflow-y: scroll; }` |
-| PDF cÃ³ 2 viá»n Ä‘en 2 bÃªn | DÃ¹ng `#zoom=120` cá»‘ Ä‘á»‹nh â†’ khÃ´ng phÃ¹ há»£p má»i mÃ n hÃ¬nh | Äá»•i sang `#view=FitH` + bá»c `max-width: 980px` |
-| Chá»¯ Sidebar bá»‹ nhá» hÆ¡n Resume | CÃ³ `font-size: 0.85em` inline trÃªn `<span>` | XÃ³a tháº» `<span>` inline, Ä‘á»“ng bá»™ HTML y há»‡t Resume |
-| Pháº§n pháº£i bá»‹ co láº¡i | `main.css` cÃ³ `max-width: 50em` trÃªn `#main` | Override: `max-width: none` |
+### Popup project
 
-## v1.1 â€” Apple Hero & Curtain Reveal
-- **Apple Hero Landing:** Thiáº¿t káº¿ láº¡i mÃ n hÃ¬nh chá»: chá»¯ to 5em, subtitle Apple gray `#a1a1a6`, nÃºt Pill Liquid Glass vá»›i `backdrop-filter: blur`.
-- **Curtain Reveal:** Bá» hiá»‡u á»©ng `opacity` (gÃ¢y Ã¡m chá»¯/ghosting). DÃ¹ng `translateY(-100vh)` â€” táº¥m rÃ¨m bay lÃªn/xuá»‘ng, hai lá»›p ná»™i dung khÃ´ng bao giá» chá»“ng nhau.
+- Sửa lỗi popup lấy nguyên `<h3>` từ card làm title.
+- Tách modal header thành:
+  - `.modal-title-main`
+  - `.modal-title-scope`
+  - `.modal-project-date`
+- Sửa lỗi title xuống dòng xấu như `AI in Action - / VinUniversity`.
+- Popup hiện tại hiển thị có chủ ý:
+  - `AI in Action` + `VinUniversity`
+  - `ESP32 Robot` + `Webserver & ESP32-CAM`
+  - `ESP32 HMI` + `Sensor Nodes`
 
-## v1.0 â€” Khá»Ÿi táº¡o Portfolio
-- Chuyá»ƒn Ä‘á»•i template Strata (html5up.net) thÃ nh Portfolio cÃ¡ nhÃ¢n vá» Embedded & Automation Robotics.
-- ThÃªm 6 project, thÃªm trang Resume (PDF), thÃªm trang Contact.
+### Nội dung project
 
+- Đổi `ESP32 HMI & Sensor Experiments` thành `ESP32 HMI & Sensor Nodes`.
+- Đổi wording của ESP32 robot thành chuyên nghiệp hơn:
+  - `ESP32 Robot`
+  - `Webserver & ESP32-CAM`
+- Chỉnh nội dung AI in Action theo hướng training/project-based, tránh tự nhận quá mức.
+- Chỉnh câu PIC từ `sensor experiments` sang `sensor interfacing`.
+
+### Sidebar và avatar
+
+- Đổi phần giới thiệu sidebar từ nhiều `<br/>` sang `.profile-summary` có class rõ ràng.
+- Thêm khoảng cách giữa các mục học vấn/chuyên môn.
+- Đẩy cụm avatar/profile desktop lên bằng `transform: translateY(-2.4rem)`.
+- Reset mobile bằng `transform: none !important`.
+- Icon footer desktop được fixed gần đáy sidebar.
+
+### Intro ROBOTWAR05
+
+- Thêm/chuẩn hóa intro preloader `ROBOTWAR05`.
+- Nền intro dùng cùng tone với home background.
+- Chữ có hiệu ứng 3D dày bằng nhiều lớp `text-shadow`.
+- Chữ hiện đầy đủ rồi fade out.
+- Có fallback `prefers-reduced-motion`.
+
+### Ảnh và carousel
+
+- Chuẩn hóa `.proj-img-carousel`.
+- Modal image/video dùng `object-fit: contain` và căn giữa.
+- Sửa đường dẫn overlay CSS từ path sai sang `assets/css/images/overlay.png`.
+- Sửa đường dẫn ảnh joystick có ký tự tiếng Việt trong ESP-NOW.
+
+### Verification đã chạy
+
+Kiểm bằng Chromium/Playwright qua local server:
+
+```powershell
+py -3 -m http.server 8105
+```
+
+Viewport đã kiểm:
+
+- Desktop `1365x768`.
+- Mobile `390x844`.
+
+Kết quả:
+
+- Không có `pageerror`.
+- Không có response `404`.
+- Intro fade xong: `opacity: 0`, `visibility: hidden`.
+- Popup AI/ESP32/HMI mở đúng, title/date tách đúng.
+- Avatar desktop đã cao hơn; mobile không bị kéo lên âm.
+
+## 2026-07-06 - SPA component hóa
+
+- `index.html` giữ khung chính, modal container và script nền.
+- `components/home.html`, `components/resume.html`, `components/contact.html` chứa nội dung từng view.
+- `assets/js/spa.js` dùng Fetch API để load component vào `#main`.
+- Cần chạy qua local server, không mở bằng `file:///`.
+
+## 2026-07-05 - Knowledge Base
+
+- Tạo thư mục `my_web/` để ghi lại kiến trúc, design rules, hướng dẫn sửa và changelog.
+- Mục tiêu: giảm sửa theo cảm tính, tăng khả năng bảo trì khi dùng AI assistant.
+
+## Trước 2026-07-05 - Nền Strata ban đầu
+
+- Dựa trên theme Strata của HTML5 UP.
+- Có sidebar cố định, main content bên phải, ảnh nền mạch điện.
+- Được tùy biến thành portfolio Embedded Systems / Automation / Robotics.

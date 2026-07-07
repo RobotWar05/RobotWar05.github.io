@@ -1,37 +1,104 @@
-# Tái Cấu Trúc Kiến Trúc (Architecture Refactoring) cho AI-Assisted SPA
+# Implementation Plan - Trạng Thái Đã Chốt
 
-Bối cảnh: Hiện tại, toàn bộ giao diện SPA đang bị dồn vào một file `index.html` khổng lồ. Mặc dù chạy rất mượt cho người dùng (tránh chớp màn hình), nhưng lại tạo ra **"Điểm mù Context" (Context Window limits)** rất lớn cho các AI Assistant (LLM) trong quá trình bảo trì code, dẫn đến tỷ lệ Halucination (bịa code, sửa nhầm dòng) cao.
+Ngày cập nhật: `2026-07-07`
 
-Mục tiêu: Đạt được sự cân bằng giữa **Trải nghiệm mượt mà của người dùng (SPA)** và **Môi trường code module hóa cho AI**.
+## 1. Quyết định hiện tại
 
-## Các Thao Tác Cơ Bản (Sẽ thực thi ngay)
-1. Tạo thư mục `my_web/05_Backup/`.
-2. Di chuyển các file tĩnh `Contact.html` và `Resume.html` đang thừa thãi ở ngoài root vào thư mục dự phòng này để tránh AI đọc nhầm.
+Bản chính cần bảo trì:
 
-## Đề Xuất Giải Pháp Kiến Trúc (Cần bạn phản hồi)
+```text
+E:\CV\RobotWar05.github.io
+```
 
-Tôi đề xuất 2 mô hình sau để giải quyết bài toán "Tách file cho AI dễ hiểu nhưng vẫn gộp thành SPA để chạy mượt". 
+Bản phụ:
 
-### Option 1: Mô Hình Fetch API (Client-Side Routing)
-Tách các `<section>` trong `index.html` thành các file độc lập (`components/contact.html`, `components/resume.html`). File `index.html` chỉ chứa bộ khung (Header, Footer). File `spa.js` sẽ dùng `fetch()` để tự động gọi nội dung của các file component đó và đắp vào trang khi người dùng bấm nút.
+```text
+E:\CV\RobotWar05-Premium-App
+```
 
-- **Ưu điểm:** Tách file vật lý thật 100%. AI (như tôi) chỉ cần mở đúng file `contact.html` (chỉ khoảng 50 dòng) để sửa. Tránh hoàn toàn Halucination.
-- **Nhược điểm:** Trình duyệt bảo mật rất nghiêm ngặt, lệnh `fetch()` sẽ báo lỗi CORS nếu bạn chỉ click đúp mở file `index.html` (giao thức `file:///`). Bạn **bắt buộc** phải dùng Extension "Live Server" trên VSCode (hoặc 1 local server tương tự) để chạy web trên máy tính.
+`RobotWar05-Premium-App` không bị xóa, nhưng không còn là source of truth. Nếu cần sửa portfolio tiếp, sửa bản GitHub IO trước.
 
-### Option 2: Mô Hình "Mini-Compiler" (Khuyên dùng cho Agentic Coding)
-Chúng ta thiết lập một thư mục `src/` chứa các file mảnh (`contact.html`, `resume.html`, `home.html`, `style.css`). 
-File `index.html` ngoài root sẽ là file **chỉ đọc (Read-only)**, cấm AI và người đụng vào.
-Tôi sẽ viết một Script siêu nhỏ (ví dụ `build.js` chạy bằng Node.js hoặc Python). 
-Mỗi khi tôi hoặc bạn sửa một tính năng trong file mảnh (`src/contact.html`), thao tác cuối cùng là chạy lệnh `node build.js`. Hệ thống sẽ tự động bưng các file mảnh này, ghép lại thành file `index.html` nguyên khối SPA.
+## 2. Kiến trúc đã chọn
 
-- **Ưu điểm:** Khắc phục nhược điểm của Option 1 (Chạy được file `index.html` bằng cách click đúp bình thường, không lo CORS). Trải nghiệm SPA vẫn mượt mà tuyệt đối. AI vẫn được làm việc trên các file cực ngắn.
-- **Nhược điểm:** Có thêm 1 bước "Build" (Gõ dòng lệnh). Nhưng bạn không cần lo, vì các AI (như tôi) hoàn toàn có thể tự động gõ lệnh này sau khi code xong.
+Đã chọn mô hình Fetch API:
 
----
+```text
+index.html
+  └── assets/js/spa.js
+        └── fetch components/*.html
+```
 
-## 🙋‍♂️ Open Questions cho Bạn (Vui lòng chọn)
+Lý do:
 
-1. Bạn có thường xuyên chạy web bằng Extension "Live Server" của VSCode không? Nếu có, **Option 1** là nhẹ nhàng nhất.
-2. Nếu bạn muốn web có thể chạy ở bất cứ đâu (kể cả click đúp file) và sẵn sàng để AI tự chạy lệnh gộp file, hãy chọn **Option 2**.
+- Không cần build step.
+- Phù hợp GitHub Pages/static hosting.
+- Dễ sửa từng component.
+- AI assistant có thể đọc đúng file nhỏ thay vì toàn bộ giao diện trong một file lớn.
 
-Hãy cho tôi biết lựa chọn của bạn (Option 1 hay Option 2) để tôi lên chi tiết kỹ thuật và thực thi!
+Nhược điểm:
+
+- Không mở trực tiếp bằng `file:///`.
+- Phải chạy local server khi test.
+
+## 3. File ownership
+
+| File | Vai trò |
+|---|---|
+| `index.html` | Khung trang, sidebar, footer, home overlay, modal container, `projectMedia`, modal JS |
+| `components/home.html` | About + Projects Timeline |
+| `components/resume.html` | Resume PDF |
+| `components/contact.html` | Contact |
+| `assets/js/spa.js` | Điều hướng SPA và fetch component |
+| `assets/css/home-overlay.css` | Home landing + intro ROBOTWAR05 |
+| `assets/css/portfolio.css` | Override layout, timeline, cards, modal, sidebar, footer |
+| `assets/css/main.css` | Theme Strata gốc và một số override nền tảng |
+| `pictures/` | Toàn bộ media portfolio |
+| `my_web/` | Tài liệu kỹ thuật |
+
+## 4. Các việc đã hoàn thành
+
+- Popup không còn lấy nguyên `<h3>` của card.
+- Modal tách title/scope/date.
+- `Sensor Experiments` đổi thành `Sensor Nodes`.
+- Nội dung project đầu được viết chuyên nghiệp hơn.
+- Ảnh modal căn giữa.
+- Timeline year marker đã căn với line.
+- Sidebar profile chuyển sang markup có class rõ.
+- Avatar desktop được đẩy lên cao hơn.
+- Mobile reset transform để không vỡ header.
+- Footer icon desktop fixed gần đáy sidebar.
+- Intro `ROBOTWAR05` có nền đồng bộ home và hiệu ứng 3D/fade.
+- Premium App được đồng bộ một số sửa, nhưng không còn là bản chính.
+
+## 5. Verification đã chạy
+
+Local server:
+
+```powershell
+cd E:\CV\RobotWar05.github.io
+py -3 -m http.server 8105
+```
+
+Kiểm bằng Chromium/Playwright:
+
+- Desktop `1365x768`.
+- Mobile `390x844`.
+- Popup: AI in Action, ESP32 Robot, ESP32 HMI.
+- Intro fade.
+- Avatar desktop/mobile.
+- Network 404.
+- Page error.
+
+Kết quả gần nhất:
+
+- Không có `pageerror`.
+- Không có response lỗi `404`.
+- Popup title/date đúng.
+- Intro ẩn đúng sau animation.
+- Avatar desktop cao hơn; mobile không bị kéo âm.
+
+## 6. Việc nên làm sau
+
+- Dọn các file phụ không còn dùng nếu chắc chắn: `replace.ps1`, `script.py`.
+- Cập nhật `README.md` nếu muốn tài liệu public cũng phản ánh kiến trúc hiện tại.
+- Nếu tiếp tục phát triển, chỉ sửa `RobotWar05.github.io` trước, sau đó mới cân nhắc có cần sync sang Premium App không.

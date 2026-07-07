@@ -1,38 +1,130 @@
 ---
-title: Kiến Trúc Component (Fetch API)
-tags: [architecture, spa, fetch]
+title: Kiến Trúc Component và Popup
+tags: [architecture, spa, fetch, modal]
 ---
 
-# 🏗️ Kiến Trúc Component (SPA Fetch API)
+# Kiến Trúc Component và Popup
 
-## Nguyên lý hoạt động
+## 1. Kiến trúc tổng thể
 
-Dự án sử dụng kiến trúc Single Page Application (SPA) nguyên bản bằng HTML, CSS, và Vanilla JS, nhưng chia nhỏ mã nguồn thành các module để chống phình to file.
-
-## Luồng lắp ráp
-
-Khi người dùng mở `index.html`, toàn bộ khung giao diện (Sidebar, Overlay) được load sẵn. Tuy nhiên, khối nội dung chính `#main` sẽ trống rỗng. File `spa.js` sử dụng Fetch API để kéo nội dung HTML tương ứng bơm vào `#main`.
+Dự án là static portfolio chạy bằng HTML/CSS/Vanilla JS. Không dùng React, không dùng build step. Kiến trúc hiện tại là SPA nhẹ:
 
 ```text
-[Người dùng click link] -> spa.js chặn sự kiện chuyển trang (e.preventDefault)
-        │
-        ▼
-[Fetch API] -> Kéo file `components/<tên-trang>.html`
-        │
-        ▼
-[$('#main').html(html)] -> Bơm nội dung vào thẻ `#main`
-        │
-        ▼
-[Cập nhật CSS/JS] -> Đổi class trên <body> và khởi chạy lại các script hiển thị hình ảnh
+index.html
+  ├── sidebar/header/footer cố định
+  ├── home landing overlay
+  ├── intro preloader ROBOTWAR05
+  ├── project modal container
+  └── script điều khiển modal
+
+assets/js/spa.js
+  └── fetch components/*.html vào #main
+
+components/home.html
+  └── About + Projects Timeline
 ```
 
-## Vai trò từng file
+## 2. Luồng load trang
 
-| File | Nội dung |
+```text
+Browser mở index.html
+        │
+        ▼
+CSS/JS nền được load
+        │
+        ▼
+Intro #intro-preloader hiển thị ROBOTWAR05 rồi fade out
+        │
+        ▼
+Home landing #home-landing hiển thị khi body có class is-home
+        │
+        ▼
+assets/js/spa.js fetch components/home.html
+        │
+        ▼
+Nội dung được bơm vào #main
+        │
+        ▼
+window.initHomeScripts() gắn popup cho từng .proj-card
+```
+
+## 3. Luồng điều hướng SPA
+
+`assets/js/spa.js` chặn click trên các link nội bộ:
+
+| Link | Component được fetch |
 |---|---|
-| `index.html` | Bộ khung HTML tĩnh, chứa Sidebar `#header`, Overlay `#home-landing` và container rỗng `#main`. Chứa các link CSS và JS. |
-| `components/home.html` | Chứa nội dung chính "About Me" và "Projects Timeline". |
-| `components/resume.html` | Chứa iframe hiển thị file PDF Resume. |
-| `components/contact.html` | Chứa giao diện liên hệ với các form và nút bấm. |
-| `assets/js/spa.js` | Trái tim của kiến trúc. Lắng nghe mọi cú click `<a>`, tự động tìm file tương ứng trong `components/` để fetch. |
-| `assets/css/portfolio.css` | Chứa các quy tắc CSS đè (override) lên theme Strata mặc định, xử lý các nút bấm, padding, và Timeline. |
+| `index.html` | `components/home.html` |
+| `Resume.html` | `components/resume.html` |
+| `Contact.html` | `components/contact.html` |
+
+Sau khi fetch:
+
+1. Nội dung được đưa vào `#main`.
+2. Body được cập nhật class dạng `home-active`, `resume-active`, `contact-active`.
+3. Nếu là Home, gọi lại `window.initHomeScripts()`.
+
+## 4. Kiến trúc project popup
+
+Popup nằm trong `index.html`:
+
+```html
+<div id="project-modal" class="modal-overlay">
+  <div class="modal-container">
+    <span class="modal-close">&times;</span>
+    <div class="modal-content" id="modal-content-area"></div>
+  </div>
+</div>
+```
+
+JS lấy danh sách `.proj-card`, gắn overlay `View`, rồi mở modal khi người dùng click ảnh.
+
+## 5. Quy tắc tách title trong modal
+
+Lỗi cũ: modal lấy nguyên `card.querySelector('.proj-body').innerHTML`, khiến `<h3>` của card bị bê thẳng vào modal. Các title dài như `AI in Action - VinUniversity` hoặc `ESP32 Robot Webserver & ESP32-CAM` dễ xuống dòng xấu.
+
+Thiết kế hiện tại:
+
+```text
+.proj-body h3
+  ├── text node đầu: modalTitle
+  ├── .desktop-text: modalScope
+  └── .yr: modalDate
+```
+
+Modal render lại header riêng:
+
+```html
+<header class="modal-project-header">
+  <h3 class="modal-project-title">
+    <span class="modal-title-main">AI in Action</span>
+    <span class="modal-title-scope">VinUniversity</span>
+  </h3>
+  <div class="modal-project-date">May - Aug 2026</div>
+</header>
+```
+
+Kết quả: title không còn xuống dòng ngẫu nhiên. Dòng chính, scope và date có vai trò riêng.
+
+## 6. Project media
+
+`projectMedia` hiện nằm trong `index.html`, không nằm trong `spa.js`.
+
+```javascript
+const projectMedia = {
+  "PickPilot": {
+    thumb: "pictures/PickPilot/1_arm.JPEG",
+    media: [
+      { type: "img", src: "pictures/PickPilot/1_arm.JPEG" }
+    ],
+    github: "https://c2-app-054.homielab.com/",
+    youtube: "https://www.youtube.com/watch?v=GM59NCCEHl4"
+  }
+};
+```
+
+Key của object phải là một phần của text trong `<h3>` để JS match được card.
+
+## 7. Bản phụ Premium App
+
+`RobotWar05-Premium-App` đã được chỉnh tương tự trong quá trình sửa, nhưng từ thời điểm chốt này không còn là bản chính. Khi cần phát triển tiếp, lấy `RobotWar05.github.io` làm source of truth.
