@@ -1,37 +1,31 @@
 /* ==========================================================
    home-overlay.css
-   CSS riêng cho màn hình Apple Hero (index.html only)
+   Trang Home: Parallax background + Text reveal loop + Shake buttons
    ========================================================== */
 
-/* --- Lớp rèm phủ toàn màn hình --- */
+/* ─── Lớp phủ toàn màn hình ─────────────────────────────── */
 #home-landing {
 	position: fixed; top: 0; left: 0;
 	width: 100vw; height: 100vh;
 	display: flex; flex-direction: column;
 	align-items: center; justify-content: center;
 	z-index: 10000; text-align: center;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	overflow: hidden;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	/* NO perspective here — it breaks the curtain translateY */
 
-	/* Nền: overlay texture + ảnh nền chính */
-	background-color: #1f1815;
-	background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url("images/overlay.png"), url("../../pictures/home/background_1.jpg");
-	background-position: top left, top left, center center;
-	background-repeat: repeat, repeat, no-repeat;
-	background-size: auto, auto, cover;
-
-	/* Curtain Reveal: mặc định bay lên ngoài màn hình */
+	/* Curtain reveal */
 	transform: translateY(-100vh);
 	pointer-events: none;
 	transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-/* Khi body có class is-home: rèm hạ xuống, hiện màn hình chào */
 body.is-home #home-landing {
 	transform: translateY(0);
 	pointer-events: auto;
 }
 
-/* Khi ở Home: ẩn nội dung Portfolio bên dưới */
+/* ─── Ẩn nội dung portfolio khi ở home ──────────────────── */
 #header, #main, #footer {
 	transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1) !important;
 }
@@ -40,194 +34,126 @@ body.is-home #main   { opacity: 0; transform: translateY(50px); pointer-events: 
 body.is-home #footer { opacity: 0; pointer-events: none; }
 body.is-home         { overflow: hidden; }
 
-/* --- Avatar tròn trên màn hình chào --- */
-.home-avatar-wrapper {
-	width: 120px; height: 120px;
-	border-radius: 50%;
-	margin: 0 auto 1.5em auto;
-	overflow: hidden;
-	box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-.home-avatar {
-	width: 100%; height: 100%;
-	object-fit: cover;
-	object-position: center 15%; /* Tiêu điểm vào mặt người */
-	transform: scale(2.2);       /* Zoom cận mặt */
-	display: block;
-}
-
-/* --- Typography --- */
-.home-title {
-	font-size: 5em; line-height: 1.1; font-weight: 700;
-	letter-spacing: -0.04em; color: #ffffff; margin-bottom: 0.1em;
-	text-shadow: 0 2px 12px rgba(0,0,0,0.6);
-}
-.home-subtitle {
-	font-size: 1.4em; line-height: 1.5;
-	color: rgba(255, 255, 255, 0.92); /* Trắng đục, tương phản rõ hơn #a1a1a6 */
-	font-weight: 400; max-width: 800px;
-	margin: 0 auto 2.5em auto; letter-spacing: -0.01em;
-	text-shadow: 0 1px 6px rgba(0,0,0,0.55);
-}
-
-/* --- Nút CTA: Liquid Glass Pill --- */
-.big-project-btn {
-	background: rgba(255,255,255,0.95);
-	backdrop-filter: saturate(180%) blur(20px);
-	-webkit-backdrop-filter: saturate(180%) blur(20px);
-	border: 1px solid rgba(255,255,255,1) !important;
-	color: #111 !important; 
-	width: 84px; height: 84px;
-	border-radius: 50%;
-	padding: 0 !important;
-	cursor: pointer;
-	transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-	display: inline-flex; align-items: center; justify-content: center;
-	box-shadow: 0 0 30px rgba(0,0,0,0.8), 0 4px 15px rgba(0,0,0,0.5) !important;
-	margin-top: 1.5em;
-}
-.big-project-btn i { font-size: 1.6em; transition: transform 0.4s ease; margin-left: 5px; color: #111 !important; }
-.big-project-btn:hover {
-	background: #ffffff !important;
-	border-color: #ffffff !important;
-	transform: scale(1.08);
-	box-shadow: 0 0 40px rgba(0,0,0,0.9), 0 10px 30px rgba(0,0,0,0.6) !important;
-}
-
-/* --- Mobile Responsiveness --- */
-@media (max-width: 768px) {
-	.home-title { 
-		font-size: min(3em, 12vw); 
-		white-space: nowrap;
-	}
-	.home-subtitle { 
-		font-size: min(1.1em, 3.8vw); 
-		padding: 0; 
-		margin-bottom: 2em; 
-		white-space: nowrap;
-	}
-	.big-project-btn { width: 60px; height: 60px; margin-top: 1em; }
-	.big-project-btn i { font-size: 1.2em; }
-}
-
-@media (max-width: 480px) {
-	.home-title { 
-		font-size: min(2.5em, 12vw); 
-	}
-	.home-subtitle { 
-		font-size: min(1em, 4vw); /* approx 12-15px depending on phone width */
-	}
-	.home-avatar-wrapper { width: 100px; height: 100px; }
-}
-
-/* --- Intro Preloader --- */
-#intro-preloader {
-	position: fixed;
+/* ─── Background Parallax ───────────────────────────────── */
+.parallax-bg {
+	position: absolute;
 	inset: 0;
-	background-color: #151412;
+	background-color: #1a1612;
 	background-image:
-		linear-gradient(rgba(0,0,0,0.68), rgba(0,0,0,0.78)),
+		linear-gradient(rgba(0,0,0,0.60), rgba(0,0,0,0.60)),
 		url("images/overlay.png"),
 		url("../../pictures/home/background_1.jpg");
 	background-position: top left, top left, center center;
 	background-repeat: repeat, repeat, no-repeat;
 	background-size: auto, auto, cover;
-	backdrop-filter: blur(10px) saturate(120%);
-	-webkit-backdrop-filter: blur(10px) saturate(120%);
-	z-index: 99999;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	animation: preloaderFadeOut 1.05s ease-in-out forwards;
-	animation-delay: 3.2s;
-	overflow: hidden;
+	z-index: 0;
 }
 
-#intro-preloader::before {
-	content: "";
+/* Dark gradient vignette on top of bg */
+.parallax-overlay {
 	position: absolute;
 	inset: 0;
 	background:
-		radial-gradient(circle at 52% 44%, rgba(255,255,255,0.10), transparent 22%),
-		linear-gradient(115deg, rgba(255,255,255,0.05), transparent 42%, rgba(0,0,0,0.28));
+		radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.55) 100%);
+	z-index: 1;
 	pointer-events: none;
 }
 
-.scatter-wrapper {
+/* ─── Content wrapper ────────────────────────────────────── */
+.home-content {
 	position: relative;
-	display: inline-flex;
-	padding: 0.2em 0.08em;
-	perspective: 900px;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2em;
 }
 
-.scatter-wrapper span {
-	position: relative;
-	font-size: clamp(3rem, 8.5vw, 7.6rem);
-	line-height: 1.05;
-	font-weight: 900;
-	color: #f7f7f3;
-	font-family: 'Impact', 'Arial Black', sans-serif;
-	letter-spacing: 0.02em;
-	text-transform: uppercase;
-	text-align: center;
-	text-shadow:
-		1px 1px 0 #d8d8d2,
-		2px 2px 0 #bdbdb7,
-		3px 3px 0 #979790,
-		4px 4px 0 #6f6f69,
-		8px 14px 24px rgba(0,0,0,0.68);
-	display: inline-block;
-	opacity: 0;
-	transform: translate(var(--tx), var(--ty)) rotate(var(--r)) scale(0.2);
-	animation: 
-		snapIntoPlace 1.1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-		flyOut 0.7s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
-	animation-delay: 
-		calc(var(--i) * 0.12s + 0.1s),
-		calc(var(--i) * 0.06s + 2.5s);
+/* ─── Title reveal wrap ──────────────────────────────────── */
+.home-title-wrap {
+	overflow: hidden; /* clips the sliding text */
+	padding: 0.1em 0;
 }
 
+/* ─── Title typography ───────────────────────────────────── */
+.home-title {
+	font-size: clamp(2rem, 5.5vw, 5rem);
+	font-weight: 800;
+	letter-spacing: 0.14em;
+	color: #ffffff;
+	margin: 0;
+	line-height: 1.1;
+	text-shadow: 0 2px 18px rgba(0,0,0,0.5);
+	white-space: nowrap;
+}
+
+/* ─── Title reveal loop keyframes ─────────────────────────
+   Slides fully from off-screen LEFT → centre → fades out → resets
+   ────────────────────────────────────────────────────────── */
+
+/* ─── CTA Button ─────────────────────────────────────────── */
+.big-project-btn {
+	background: rgba(255,255,255,0.18);
+	backdrop-filter: saturate(160%) blur(20px);
+	-webkit-backdrop-filter: saturate(160%) blur(20px);
+	border: 1.5px solid rgba(255,255,255,0.55) !important;
+	color: #fff !important;
+	width: 80px; height: 80px;
+	border-radius: 50%;
+	padding: 0 !important;
+	cursor: pointer;
+	display: inline-flex; align-items: center; justify-content: center;
+	box-shadow: 0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.25) !important;
+	transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.big-project-btn i {
+	font-size: 1.5em;
+	margin-left: 5px;
+	color: #fff !important;
+	transition: transform 0.3s ease;
+}
+.big-project-btn:hover {
+	background: rgba(255,255,255,0.30) !important;
+	border-color: rgba(255,255,255,0.80) !important;
+	transform: scale(1.1);
+	box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.35) !important;
+	animation: btnShake 0.4s ease;
+}
+
+/* ─── Shake keyframes ─────────────────────────────────────── */
+@keyframes btnShake {
+	0%, 100% { transform: scale(1.1) rotate(0deg); }
+	20%       { transform: scale(1.1) rotate(-4deg); }
+	40%       { transform: scale(1.1) rotate(4deg); }
+	60%       { transform: scale(1.1) rotate(-3deg); }
+	80%       { transform: scale(1.1) rotate(2deg); }
+}
+
+/* ─── Mobile ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-	.scatter-wrapper span {
-		font-size: clamp(2.2rem, 14vw, 4.8rem);
+	.home-title {
+		font-size: clamp(1.6rem, 7.5vw, 2.8rem);
+		letter-spacing: 0.08em;
+	}
+	.big-project-btn { width: 64px; height: 64px; }
+	.big-project-btn i { font-size: 1.2em; }
+}
+
+@media (max-width: 480px) {
+	.home-title {
+		font-size: clamp(1.3rem, 7vw, 2.2rem);
+		letter-spacing: 0.06em;
 	}
 }
 
-@keyframes snapIntoPlace {
-	0% {
-		opacity: 0;
-		transform: translate(var(--tx), var(--ty)) rotate(var(--r)) scale(0.2);
-	}
-	100% {
-		opacity: 1;
-		transform: translate(0, 0) rotate(0) scale(1);
-	}
-}
-
-@keyframes flyOut {
-	0% {
-		opacity: 1;
-		transform: translate(0, 0) rotate(0) scale(1);
-		filter: blur(0);
-	}
-	100% {
-		opacity: 0;
-		transform: translate(calc(var(--tx) * 1.5), calc(var(--ty) * 1.5)) rotate(calc(var(--r) * -1)) scale(2);
-		filter: blur(8px);
-	}
-}
-
+/* ─── Reduced motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-	#intro-preloader,
-	.scatter-wrapper span {
-		animation: none;
-	}
-	#intro-preloader {
-		display: none;
-	}
+	.home-title { animation: none; opacity: 1; transform: none; }
+	.big-project-btn:hover { animation: none; }
 }
 
+/* ─── preloaderFadeOut (kept for compat, no longer used) ─── */
 @keyframes preloaderFadeOut {
-	0% { opacity: 1; visibility: visible; }
+	0%   { opacity: 1; visibility: visible; }
 	100% { opacity: 0; visibility: hidden; }
 }

@@ -10,30 +10,31 @@
 		<link rel="stylesheet" href="assets/css/portfolio.css" />
 	</head>
 	<body class="is-preload is-home">
+		<!-- Anti-FOUC: apply theme before CSS renders -->
+		<script>
+			(function(){
+				var t=localStorage.getItem('site-theme');
+				var valid=['theme-light','theme-dark','theme-grey'];
+				if(!t||valid.indexOf(t)===-1){t='theme-dark';localStorage.setItem('site-theme',t);}
+				document.body.classList.add(t);
+			})();
+		</script>
 
-		<!-- Intro Preloader (Scattered effect) -->
-		<div id="intro-preloader">
-			<div class="scatter-wrapper">
-				<span style="--i:1; --tx:-150px; --ty:-100px; --r:-45deg;">R</span>
-				<span style="--i:2; --tx:100px; --ty:-150px; --r:30deg;">O</span>
-				<span style="--i:3; --tx:-50px; --ty:150px; --r:-20deg;">B</span>
-				<span style="--i:4; --tx:150px; --ty:50px; --r:45deg;">O</span>
-				<span style="--i:5; --tx:-100px; --ty:-50px; --r:-15deg;">T</span>
-				<span style="--i:6; --tx:50px; --ty:100px; --r:25deg;">W</span>
-				<span style="--i:7; --tx:-120px; --ty:120px; --r:-60deg;">A</span>
-				<span style="--i:8; --tx:120px; --ty:-120px; --r:60deg;">R</span>
-				<span style="--i:9; --tx:-80px; --ty:-130px; --r:-35deg;">0</span>
-				<span style="--i:10; --tx:80px; --ty:130px; --r:35deg;">5</span>
-			</div>
-		</div>
-
-		<!-- Apple Style Home Overlay -->
+		<!-- Home Landing Overlay -->
 		<div id="home-landing">
+			<!-- Parallax background layers -->
+			<div class="parallax-bg" id="parallax-bg"></div>
+			<div class="parallax-overlay"></div>
 
-			<h1 class="home-title">NGUYEN LUONG</h1>
-			<button id="btn-enter-portfolio" class="big-project-btn" title="Explore Projects">
-				<i class="icon solid fa-play"></i>
-			</button>
+			<!-- Content -->
+			<div class="home-content">
+				<div class="home-title-wrap">
+					<h1 class="home-title" id="home-title">NGUYEN LUONG</h1>
+				</div>
+				<button id="btn-enter-portfolio" class="big-project-btn" title="Explore Projects">
+					<i class="icon solid fa-play"></i>
+				</button>
+			</div>
 		</div>
 
 		<!-- Header / Sidebar -->
@@ -463,12 +464,10 @@
 				currentThemeIndex = themes.indexOf(savedTheme);
 				document.body.classList.add(themes[currentThemeIndex]);
 			} else {
-				// Default is theme-light if not saved or invalid
-				if (savedTheme === 'theme-warm') {
-					currentThemeIndex = 2;
-					document.body.classList.add('theme-grey');
-					localStorage.setItem('site-theme', 'theme-grey');
-				}
+				// Default: dark theme
+				currentThemeIndex = 1; // theme-dark
+				document.body.classList.add('theme-dark');
+				localStorage.setItem('site-theme', 'theme-dark');
 			}
 
 			document.body.addEventListener('click', function(e) {

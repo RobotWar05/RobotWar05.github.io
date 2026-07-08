@@ -111,3 +111,9 @@ Kết quả:
 - **Nút Home**: Thêm class 
 o-spa để ép trình duyệt load lại hoàn toàn index.html khi bấm nút Home, giúp trang hiển thị lại màn hình Intro (ROBOTWAR05) như người dùng yêu cầu thay vì chỉ cuộn lên đầu trang.
 - **Intro (F5)**: Xóa logic lưu sessionStorage trong index.html để màn hình Intro luôn xuất hiện khi F5 tại trang chủ. (Kết hợp với update trước: F5 ở Resume/Contact sẽ không có Intro).
+
+## 2026-07-08 - Pixar Intro Animation
+
+- **Cập nhật hiệu ứng Intro**: Sửa đổi CSS animation của màn hình intro.
+  - Các chữ cái (ROBOTWAR05) mọc lên từ từ (scale từ 0 lên 1) tại các vị trí phân tán, sau đó từ từ di chuyển về vị trí đúng.
+  - Thêm hiệu ứng nhún nhảy (Pixar Lamp / Luxo Jr.): Chữ \R\ đầu tiên sẽ nhảy chồm lên chữ \O\ bên cạnh, làm chữ \O\ bị bẹp xuống, sau đó chữ \R\ nảy lại về vị trí cũ và chữ \O\ nảy lên phục hồi hình dáng.

@@ -10,6 +10,15 @@
 		<link rel="stylesheet" href="assets/css/portfolio.css" />
 	</head>
 	<body class="is-preload">
+		<!-- Anti-FOUC: apply theme before CSS renders -->
+		<script>
+			(function(){
+				var t=localStorage.getItem('site-theme');
+				var valid=['theme-light','theme-dark','theme-grey'];
+				if(!t||valid.indexOf(t)===-1){t='theme-dark';localStorage.setItem('site-theme',t);}
+				document.body.classList.add(t);
+			})();
+		</script>
 
 		<!-- Intro Preloader (Scattered effect) -->
 		<script>
@@ -474,12 +483,10 @@
 				currentThemeIndex = themes.indexOf(savedTheme);
 				document.body.classList.add(themes[currentThemeIndex]);
 			} else {
-				// Default is theme-light if not saved or invalid
-				if (savedTheme === 'theme-warm') {
-					currentThemeIndex = 2;
-					document.body.classList.add('theme-grey');
-					localStorage.setItem('site-theme', 'theme-grey');
-				}
+				// Default: dark theme
+				currentThemeIndex = 1;
+				document.body.classList.add('theme-dark');
+				localStorage.setItem('site-theme', 'theme-dark');
 			}
 
 			document.body.addEventListener('click', function(e) {
