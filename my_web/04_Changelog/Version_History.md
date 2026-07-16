@@ -5,6 +5,17 @@ tags: [changelog, stable]
 
 # Lịch Sử Phiên Bản
 
+## 2026-07-16 - Tinh chỉnh Giao diện & Hiệu suất
+
+- Đổi cấu trúc HTML để đồng bộ chiều cao và bỏ việc tự động thêm dấu `...` (ellipsis) khi chữ dài.
+- Tinh gọn nội dung hiển thị ở các ô Project (PickPilot, ESP32 Robot, vv.) để hiển thị gọn trong 1-2 dòng.
+- Sửa lưới hiển thị `Education` trên điện thoại (từ 1 cột chiếm toàn màn hình thành 2 cột `grid-template-columns: repeat(2, 1fr)`).
+- Tối ưu hiệu suất: Thêm thuộc tính `loading="lazy"` cho toàn bộ 33 bức ảnh để chống nghẽn mạng lúc tải trang.
+- Đã sửa lỗi JS ghi đè ảnh gốc của PickPilot (Cập nhật từ JPEG sang `1_arm.jpg` và `2_arm.jpg`).
+- Cập nhật link YouTube mới cho dự án PickPilot.
+- Thiết kế một bản kế hoạch tích hợp CMS/Backend cho tương lai (`implementation_plan.md`).
+
+
 ## 2026-07-07 - Chốt bản ổn định GitHub IO
 
 Trạng thái:
