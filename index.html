@@ -9,7 +9,7 @@
 		<link href="pictures/logo.png" rel="icon" type="image/png">
 		<link rel="stylesheet" href="assets/css/portfolio.css" />
 	</head>
-	<body class="is-preload is-home">
+	<body class="is-preload">
 		<!-- Anti-FOUC: apply theme before CSS renders -->
 		<script>
 			(function(){
@@ -19,23 +19,6 @@
 				document.body.classList.add(t);
 			})();
 		</script>
-
-		<!-- Home Landing Overlay -->
-		<div id="home-landing">
-			<!-- Parallax background layers -->
-			<div class="parallax-bg" id="parallax-bg"></div>
-			<div class="parallax-overlay"></div>
-
-			<!-- Content -->
-			<div class="home-content">
-				<div class="home-title-wrap">
-					<h1 class="home-title" id="home-title">NGUYEN LUONG</h1>
-				</div>
-				<button id="btn-enter-portfolio" class="big-project-btn" title="Explore Projects">
-					<i class="icon solid fa-play"></i>
-				</button>
-			</div>
-		</div>
 
 		<!-- Header / Sidebar -->
   		<header id="header">
@@ -432,24 +415,6 @@
 				window.currentSlideIndex = index;
 				window.updateCarousel(true);
 			};
-		</script>
-
-		<script>
-			if (window.location.hash === '#portfolio') {
-				document.body.classList.remove('is-home');
-			}
-			document.getElementById('btn-enter-portfolio').addEventListener('click', function(e) {
-				e.preventDefault();
-				document.body.classList.remove('is-home');
-				window.history.pushState(null, null, '#portfolio');
-				window.scrollTo({ top: 0, behavior: 'smooth' });
-			});
-			document.addEventListener('keydown', function(e) {
-				if (e.key === 'Enter' && document.body.classList.contains('is-home')) {
-					e.preventDefault();
-					document.getElementById('btn-enter-portfolio').click();
-				}
-			});
 		</script>
 
 	<script>
